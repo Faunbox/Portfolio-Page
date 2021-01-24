@@ -65,7 +65,7 @@ const Menu = () => {
   const navLinksArr = [
     { name: "Main Page", href: "/" },
     { name: "About Me", href: "/about" },
-    { name: "Portfolio", href: "/portfolio" },
+    { name: "Skills", href: "/skills" },
     { name: "Contact", href: "/contact" },
   ];
   const handleMenuClick = () => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 
 import MyImg from "../Images/P1000785-removebg-preview.png";
@@ -23,7 +23,6 @@ const AboutImage = styled.img`
   height: 100%;
   margin: 15px;
 `;
-
 const About = () => {
   return (
     <>

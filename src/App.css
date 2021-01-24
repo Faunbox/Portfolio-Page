@@ -3,3 +3,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.App {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+input {
+  cursor: pointer;
+}

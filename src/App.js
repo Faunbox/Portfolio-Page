@@ -11,6 +11,7 @@ import Contact from "./Components/Contact";
 import About from "./Components/About";
 import Portfolio from "./Components/Portfolio";
 import Footer from "./Components/Footer";
+import { useEffect } from "react";
 // import Privacy from "./Components/Privacy";
 
 function App() {

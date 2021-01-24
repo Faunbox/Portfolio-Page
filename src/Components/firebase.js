@@ -3,6 +3,7 @@ import "firebase/analytics";
 import "firebase/firestore";
 import "firebase/storage";
 import "firebase/auth";
+// import 'firebase/functions'
 
 //Firebase config
 const firebaseConfig = {
@@ -16,11 +17,11 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
 firebase.analytics();
 firebase.firestore();
 firebase.storage();
 firebase.auth();
+// firebase.functions()
 
 export const authAnony = () => {
   return firebase.auth().signInAnonymously();

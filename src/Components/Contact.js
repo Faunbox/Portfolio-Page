@@ -1,121 +1,182 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Formik, Form, Field } from "formik";
-import { Button, LinearProgress } from "@material-ui/core";
-import { TextField } from "formik-material-ui";
-import Box from "@material-ui/core/Box";
+
+//Formik
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+//Material ui
+import { Button, Box, TextField, Snackbar } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+//firebase
+import firebase from "firebase/app";
+import "firebase/firestore";
+// import { authAnony } from "./firebase";
 
 const Wrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  width: 100vw;
   padding: 5%;
   color: white;
   background-color: grey;
 `;
 
+const Form = styled.form`
+  width: 100%;
+`;
+
+const useStyles = makeStyles({
+  root: {
+    cursor: "pointer",
+  },
+  success: {
+    backgroundColor: "green",
+  },
+});
+
 const Contact = () => {
+  //submit state
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  //Snackbar state
+  const [isOpen, setIsOpen] = useState(false);
+  //Material Ui classes
+  const classes = useStyles();
+
+  // firebase upload contact form on submit
+  const uploadData = (data) => {
+    const db = firebase.firestore();
+    const docRef = db.collection("contact_form").doc(data.subject);
+
+    docRef
+      .set(data)
+      // .set(data)
+      .then(console.log("wysłano " + { data }))
+      .catch((error) => console.log("Błąd wysyłania") + error);
+  };
+
+  //Formik
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    },
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .min(3, "Name must be longer than 3 character")
+        .required("Required"),
+      email: Yup.string().email("Invalid email address").required("Required"),
+      subject: Yup.string()
+        .min(5, "Subject must be longer than 5 character")
+        .required("Required"),
+      message: Yup.string()
+        .min(10, "Message must be longer than 10 character")
+        // .max(150, "Message must be shorter than 100 characters")
+        .required("Required"),
+    }),
+    onSubmit: (values, { resetForm }) => {
+      // alert(JSON.stringify(values, null, 2));
+      uploadData(values);
+      resetForm({});
+      setIsSubmitted((prevstate) => !prevstate);
+    },
+  });
+
   return (
     <>
       <Wrapper>
-        <Formik
-          initialValues={{
-            name: "",
-            email: "",
-            subject: "",
-            message: "",
-          }}
-          validate={(values) => {
-            const errors = {};
-            if (!values.email) {
-              errors.email = "Required";
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-            ) {
-              errors.email = "Invalid email address";
-            }
-
-            if (!values.name) {
-              errors.name = "Required";
-            } else if (values.name.length < 3) {
-              errors.name = "Name must be longer than 3 character";
-            }
-
-            if (!values.subject) errors.subject = "Required";
-            else if (values.subject.length < 5)
-              errors.subject = "Subject must be longer than 5 character";
-
-            if (!values.message) errors.message = "Required";
-            else if (values.message < 10)
-              errors.message = "Message must be longer than 10 character";
-
-            return errors;
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              setSubmitting(false);
-              alert(JSON.stringify(values, null, 2));
-            }, 500);
-          }}>
-          {({ submitForm, isSubmitting }) => (
-            <Form>
-              <Box margin={4}>
-                <Field
-                  component={TextField}
-                  type="name"
-                  label="Name"
-                  name="name"
-                  variant="outlined"
-                  fullWidth
-                />
-              </Box>
-              <Box margin={4}>
-                <Field
-                  component={TextField}
-                  name="email"
-                  type="email"
-                  label="Email"
-                  variant="outlined"
-                  fullWidth
-                  // helperText="Enter Your Email"
-                />
-              </Box>
-              <Box margin={4}>
-                <Field
-                  component={TextField}
-                  type="subject"
-                  label="Subject"
-                  name="subject"
-                  variant="outlined"
-                  fullWidth
-                />
-              </Box>
-              {isSubmitting && <LinearProgress />}
-              <Box margin={4}>
-                <Field
-                  component={TextField}
-                  rows="10"
-                  type="text"
-                  name="message"
-                  placeholder="Enter your message here"
-                  variant="outlined"
-                  fullWidth
-                  multiline
-                />
-              </Box>
-              <Box margin={1}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  disabled={isSubmitting}
-                  onClick={submitForm}>
-                  Submit
-                </Button>
-              </Box>
-            </Form>
-          )}
-        </Formik>
+        <h1 className="contact">Wanna contact?</h1>
+        <Form onSubmit={formik.handleSubmit}>
+          <Box margin={4}>
+            <TextField
+              className={classes.input}
+              disabled={isSubmitted ? true : false}
+              type="name"
+              label="Your Name"
+              name="name"
+              variant="outlined"
+              fullWidth
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name ? formik.errors.name : ""}
+              onChange={formik.handleChange}
+              value={formik.values.name}
+            />
+          </Box>
+          <Box margin={4}>
+            <TextField
+              disabled={isSubmitted ? true : false}
+              name="email"
+              type="email"
+              label="Your Email"
+              variant="outlined"
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              fullWidth
+              helperText={formik.touched.email ? formik.errors.email : ""}
+              onChange={formik.handleChange}
+              value={formik.values.email}
+            />
+          </Box>
+          <Box margin={4}>
+            <TextField
+              disabled={isSubmitted ? true : false}
+              type="subject"
+              label="Subject"
+              name="subject"
+              variant="outlined"
+              fullWidth
+              helperText={formik.touched.subject ? formik.errors.subject : ""}
+              error={formik.touched.subject && Boolean(formik.errors.subject)}
+              onChange={formik.handleChange}
+              value={formik.values.subject}
+            />
+          </Box>
+          <Box margin={4}>
+            <TextField
+              className={classes.input}
+              disabled={isSubmitted ? true : false}
+              rows="10"
+              type="text"
+              name="message"
+              placeholder="Enter your message here"
+              variant="outlined"
+              fullWidth
+              multiline
+              helperText={formik.touched.message ? formik.errors.message : ""}
+              onBlur={formik.handleBlur}
+              error={formik.touched.message && Boolean(formik.errors.message)}
+              size="medium"
+              onChange={formik.handleChange}
+              value={formik.values.message}
+            />
+          </Box>
+          <Box margin={1}>
+            <Button
+              disabled={isSubmitted ? true : false}
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth>
+              {!isSubmitted ? "Submit" : "Done!"}
+            </Button>
+          </Box>
+        </Form>
+        {isSubmitted ? (
+          // <p>działa</p>
+          <Snackbar
+            className={classes.success}
+            anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
+            autoHideDuration={5000}
+            open={!isOpen}
+            onClose={() => setIsOpen((prevstate) => !prevstate)}
+            message="Succes!"
+          />
+        ) : null}
       </Wrapper>
     </>
   );
