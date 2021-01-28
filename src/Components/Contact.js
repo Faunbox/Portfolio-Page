@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
+
+// import ReCAPTCHA from "react-google-recaptcha";
 
 //Formik
 import { useFormik } from "formik";
@@ -44,8 +46,16 @@ const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   //Snackbar state
   const [isOpen, setIsOpen] = useState(false);
+
+  // //reCaptcha state
+  // const [value, setValue] = useState("");
+  // const [expired, setIsExpired] = useState(false);
+
   //Material Ui classes
   const classes = useStyles();
+
+  // //Refs
+  // const reCaptchaRef = useRef(null);
 
   // firebase upload contact form on submit
   const uploadData = (data) => {
@@ -87,6 +97,13 @@ const Contact = () => {
       setIsSubmitted((prevstate) => !prevstate);
     },
   });
+
+  // //reCaptcha
+  // const handleOnChange = (value) => {
+  //   console.log(value);
+  //   setValue(value);
+  //   if (value === null) setIsExpired((expired) => !expired);
+  // };
 
   return (
     <>
@@ -155,6 +172,13 @@ const Contact = () => {
               value={formik.values.message}
             />
           </Box>
+          {/* <ReCAPTCHA
+            sitekey="6LeMyT8aAAAAAAiqLVzGRmt3DPsQ70m5ENcAjNUE"
+            ref={reCaptchaRef}
+            onChange={handleOnChange}
+            theme="dark"
+            size="normal"
+          /> */}
           <Box margin={1}>
             <Button
               disabled={isSubmitted ? true : false}
@@ -167,7 +191,6 @@ const Contact = () => {
           </Box>
         </Form>
         {isSubmitted ? (
-          // <p>działa</p>
           <Snackbar
             className={classes.success}
             anchorOrigin={{ horizontal: "center", vertical: "bottom" }}

@@ -35,9 +35,9 @@ const Wrapper = styled.div`
   left: 0;
   display: flex;
   background-color: ${({ state }) =>
-    state === "active" ? "rgba(105, 215, 45, 0.56)" : "transparent"};
+    state === "active" ? "rgba(0, 0, 0, 0.56)" : "transparent"};
   /* block-size: 0; */
-  /* z-index: 1; */
+  z-index: 1;
   width: 100vw;
   height: 100vh;
   transition: 0.7s ease;
@@ -52,7 +52,7 @@ const Nav = styled.nav`
   width: 40%;
   height: 100vh;
   z-index: 1;
-  background-color: #fac;
+  background-color: grey;
   transform: ${({ state }) =>
     state === "active" ? "translateX(0)" : "translateX(-100%)"};
   transition: 0.8s ease;

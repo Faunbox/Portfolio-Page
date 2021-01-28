@@ -28,7 +28,7 @@ const Hello = styled.h1`
 `;
 
 const Intro = styled.h2`
-  font-size: 40px;
+  font-size: 35px;
   font-weight: normal;
 `;
 const ArrowIcon = styled.div`
@@ -37,8 +37,6 @@ const ArrowIcon = styled.div`
   top: 90%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transition: 1s ease;
-  /* overflow: scroll; */
 `;
 
 const Main = () => {
@@ -51,20 +49,54 @@ const Main = () => {
     gsap.to(window, { duration: 2, scrollTo: window.screen.height });
     gsap.to(arrow, 1, { autoAlpha: 0, ease: "easeIn" });
   };
-
   useEffect(() => {
     const arrow = arrowRef.current;
-    const tl = gsap.timeline({ repeat: -1 });
+    const mainSection = mainSectionRef.current;
 
-    tl.fromTo(arrow, 2, { y: 50 }, { y: -80 });
+    //Arrow Icon Bouncing
+    const tl = gsap.timeline({ repeat: -1, yoyo: true });
+    tl.fromTo(arrow, 1, { y: "+=30" }, { y: 10 });
+
+    //Arrow Div functionality
+    gsap.fromTo(
+      arrow,
+      1,
+      { autoAlpha: 1 },
+      {
+        autoAlpha: 0,
+        display: "none",
+        scrollTrigger: {
+          trigger: mainSection,
+          start: "10% top",
+          markers: true,
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
   }, [arrowRef]);
+
+  //Animate MainSection on page loads
+  useEffect(() => {
+    const mainSectionChilldrens = mainSectionRef.current.children;
+    const tl = gsap.timeline({ duration: 1, ease: "ease-In" });
+    [...mainSectionChilldrens].forEach((element) => {
+      tl.fromTo(
+        element,
+        1,
+        { autoAlpha: 0, y: "+=40" },
+        { autoAlpha: 1, y: 0 }
+      );
+    });
+  }, [mainSectionRef]);
 
   return (
     <MainSection ref={mainSectionRef}>
       <Hello>Hello!</Hello>
-      <Intro>I'm Filip, Front-End Developer</Intro>
-      <ArrowIcon ref={arrowRef} onClick={scrollDown}>
-        <ArrowDownwardIcon fontSize="large" />
+      <Intro>
+        I'm Filip, <span>Front-End Developer</span>
+      </Intro>
+      <ArrowIcon onClick={scrollDown}>
+        <ArrowDownwardIcon ref={arrowRef} fontSize="large" />
       </ArrowIcon>
     </MainSection>
   );

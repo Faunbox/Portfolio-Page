@@ -12,7 +12,7 @@ const AboutWrapper = styled.article`
   min-height: 100vh;
   padding: 5%;
   color: white;
-  background-color: grey;
+  background-color: black;
 `;
 
 const Paragraph = styled.p``;
