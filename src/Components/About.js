@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 
-import MyImg from "../Images/P1000785-removebg-preview.png";
-
 const AboutWrapper = styled.article`
+  /* position: relative; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,17 +16,10 @@ const AboutWrapper = styled.article`
 
 const Paragraph = styled.p``;
 
-const AboutImage = styled.img`
-  border-radius: 50%;
-  width: 100%;
-  height: 100%;
-  margin: 15px;
-`;
 const About = () => {
   return (
     <>
       <AboutWrapper>
-        <AboutImage alt="my picture" src={MyImg} />
         <Paragraph>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident
           iste, perspiciatis quo consectetur ad veniam vel aperiam labore,

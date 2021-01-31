@@ -1,7 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-
-// import ReCAPTCHA from "react-google-recaptcha";
 
 //Formik
 import { useFormik } from "formik";
@@ -14,9 +12,9 @@ import { makeStyles } from "@material-ui/core/styles";
 //firebase
 import firebase from "firebase/app";
 import "firebase/firestore";
-// import { authAnony } from "./firebase";
 
 const Wrapper = styled.div`
+  /* position: relative; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -47,15 +45,8 @@ const Contact = () => {
   //Snackbar state
   const [isOpen, setIsOpen] = useState(false);
 
-  // //reCaptcha state
-  // const [value, setValue] = useState("");
-  // const [expired, setIsExpired] = useState(false);
-
   //Material Ui classes
   const classes = useStyles();
-
-  // //Refs
-  // const reCaptchaRef = useRef(null);
 
   // firebase upload contact form on submit
   const uploadData = (data) => {
@@ -98,28 +89,22 @@ const Contact = () => {
     },
   });
 
-  // //reCaptcha
-  // const handleOnChange = (value) => {
-  //   console.log(value);
-  //   setValue(value);
-  //   if (value === null) setIsExpired((expired) => !expired);
-  // };
-
   return (
     <>
       <Wrapper>
         <h1 className="contact">Wanna contact?</h1>
         <Form onSubmit={formik.handleSubmit}>
-          <Box margin={4}>
+          <Box margin={4} zIndex={0} position="relative">
             <TextField
-              className={classes.input}
               disabled={isSubmitted ? true : false}
               type="name"
               label="Your Name"
+              placeholder="Enter Your Name"
               name="name"
               variant="outlined"
               fullWidth
               error={formik.touched.name && Boolean(formik.errors.name)}
+              onBlur={formik.handleBlur}
               helperText={formik.touched.name ? formik.errors.name : ""}
               onChange={formik.handleChange}
               value={formik.values.name}
@@ -130,11 +115,13 @@ const Contact = () => {
               disabled={isSubmitted ? true : false}
               name="email"
               type="email"
-              label="Your Email"
+              label="Email"
+              placeholder="Enter Your Email"
               variant="outlined"
               error={formik.touched.email && Boolean(formik.errors.email)}
               fullWidth
               helperText={formik.touched.email ? formik.errors.email : ""}
+              onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               value={formik.values.email}
             />
@@ -145,21 +132,24 @@ const Contact = () => {
               type="subject"
               label="Subject"
               name="subject"
+              placeholder="Enter your subject here"
               variant="outlined"
               fullWidth
               helperText={formik.touched.subject ? formik.errors.subject : ""}
               error={formik.touched.subject && Boolean(formik.errors.subject)}
+              onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               value={formik.values.subject}
             />
           </Box>
           <Box margin={4}>
             <TextField
-              className={classes.input}
+              className={classes.root}
               disabled={isSubmitted ? true : false}
               rows="10"
               type="text"
               name="message"
+              label="Message"
               placeholder="Enter your message here"
               variant="outlined"
               fullWidth
@@ -172,20 +162,14 @@ const Contact = () => {
               value={formik.values.message}
             />
           </Box>
-          {/* <ReCAPTCHA
-            sitekey="6LeMyT8aAAAAAAiqLVzGRmt3DPsQ70m5ENcAjNUE"
-            ref={reCaptchaRef}
-            onChange={handleOnChange}
-            theme="dark"
-            size="normal"
-          /> */}
           <Box margin={1}>
             <Button
               disabled={isSubmitted ? true : false}
               type="submit"
               variant="contained"
               color="primary"
-              fullWidth>
+              fullWidth
+              disableElevation>
               {!isSubmitted ? "Submit" : "Done!"}
             </Button>
           </Box>

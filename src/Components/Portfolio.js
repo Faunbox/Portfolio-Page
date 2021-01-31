@@ -9,10 +9,16 @@ const PortfolioWrapper = styled.section`
   background-color: black;
 `;
 
+const H1 = styled.h1`
+  color: white;
+`;
+
 const Portfolio = () => {
   return (
     <>
-      <PortfolioWrapper></PortfolioWrapper>
+      <PortfolioWrapper>
+        <H1>My skills:</H1>
+      </PortfolioWrapper>
     </>
   );
 };

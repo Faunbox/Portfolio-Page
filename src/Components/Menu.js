@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import styled from "styled-components";
-import { makeStyles } from "@material-ui/core/styles";
 
 //Material UI Components
+import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import ClearIcon from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";
@@ -14,7 +15,7 @@ const useStyles = makeStyles({
     position: "fixed",
     top: 20,
     left: 30,
-    zIndex: 1,
+    zIndex: 10,
     "& svg": {
       position: "fixed",
       fontSize: 45,
@@ -30,37 +31,46 @@ const useStyles = makeStyles({
 });
 
 const Wrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
   display: flex;
-  background-color: ${({ state }) =>
-    state === "active" ? "rgba(0, 0, 0, 0.56)" : "transparent"};
-  /* block-size: 0; */
-  z-index: 1;
-  width: 100vw;
-  height: 100vh;
   transition: 0.7s ease;
 `;
 const Nav = styled.nav`
-  /* position: absolute; */
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  top: 0;
+  left: 0;
   width: 40%;
+  /* border-top-right-radius: 500%;
+  border-bottom-right-radius: 500%; */
+  z-index: 2;
   height: 100vh;
-  z-index: 1;
   background-color: grey;
   transform: ${({ state }) =>
-    state === "active" ? "translateX(0)" : "translateX(-100%)"};
+    state === "active" ? "translate(0, 0)" : "translate(-100%, 0)"};
   transition: 0.8s ease;
 `;
 
-const Menu = () => {
+const TransparentBg = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: ${({ state }) =>
+    state === "active" ? "rgba(0, 0, 0, 0.9)" : "transparent"};
+  z-index: 1;
+  transform: ${({ state }) =>
+    state === "active" ? "translate(0, 0)" : "translate(100%, 0)"};
+  transition: 0.8s ease;
+`;
+
+const Menu = (props) => {
   const classes = useStyles();
   const [click, setClick] = useState(false);
+  const [propValue, setPropValue] = useState({});
 
   const navLinksArr = [
     { name: "Main Page", href: "/" },
@@ -72,15 +82,21 @@ const Menu = () => {
     setClick((click) => !click);
   };
 
-  const handleNavClick = () => {
+  const handleNavClick = (e) => {
+    e.preventDefault();
     console.log("działa");
+    console.log(props.menuRef);
     setClick((click) => !click);
   };
 
   const handleAwayClick = () => {
-    // console.log("awayClcik");
-    if (click) setClick(false);
+    click && setClick(false);
   };
+
+  useEffect(() => {
+    setPropValue(props.menuRef);
+    console.log(propValue);
+  }, [propValue]);
 
   const state_props = click ? "active" : "disactive";
 
@@ -98,6 +114,8 @@ const Menu = () => {
             </Link>
           ))}
         </Nav>
+        <TransparentBg state={state_props}></TransparentBg>
+
         <IconButton onClick={handleMenuClick} className={classes.large}>
           {click ? <ClearIcon /> : <MenuIcon />}
         </IconButton>

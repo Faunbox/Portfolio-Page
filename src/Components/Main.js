@@ -33,9 +33,10 @@ const Intro = styled.h2`
 `;
 const ArrowIcon = styled.div`
   position: fixed;
-  color: red;
+  color: white;
   top: 90%;
   left: 50%;
+  z-index: 1;
   transform: translate(-50%, -50%);
 `;
 
@@ -68,7 +69,7 @@ const Main = () => {
         scrollTrigger: {
           trigger: mainSection,
           start: "10% top",
-          markers: true,
+          // markers: true,
           toggleActions: "play none none reverse",
         },
       }
