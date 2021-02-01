@@ -91,7 +91,7 @@ const Contact = () => {
 
   return (
     <>
-      <Wrapper>
+      <Wrapper id="contact">
         <h1 className="contact">Wanna contact?</h1>
         <Form onSubmit={formik.handleSubmit}>
           <Box margin={4} zIndex={0} position="relative">

@@ -16,7 +16,7 @@ const H1 = styled.h1`
 const Portfolio = () => {
   return (
     <>
-      <PortfolioWrapper>
+      <PortfolioWrapper id="portfolio">
         <H1>My skills:</H1>
       </PortfolioWrapper>
     </>

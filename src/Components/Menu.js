@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components";
 
@@ -70,7 +70,6 @@ const TransparentBg = styled.div`
 const Menu = (props) => {
   const classes = useStyles();
   const [click, setClick] = useState(false);
-  const [propValue, setPropValue] = useState({});
 
   const navLinksArr = [
     { name: "Main Page", href: "/" },
@@ -82,21 +81,19 @@ const Menu = (props) => {
     setClick((click) => !click);
   };
 
-  const handleNavClick = (e) => {
+  const handleNavClick = (id) => (e) => {
     e.preventDefault();
-    console.log("działa");
-    console.log(props.menuRef);
     setClick((click) => !click);
+    let appRef = props.menuRef.current;
+    appRef.children[id + 1].scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
 
   const handleAwayClick = () => {
     click && setClick(false);
   };
-
-  useEffect(() => {
-    setPropValue(props.menuRef);
-    console.log(propValue);
-  }, [propValue]);
 
   const state_props = click ? "active" : "disactive";
 
@@ -109,7 +106,7 @@ const Menu = (props) => {
               className={classes.link}
               href={navLink.href}
               key={id}
-              onClick={handleNavClick}>
+              onClick={handleNavClick(id)}>
               {navLink.name}
             </Link>
           ))}

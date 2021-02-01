@@ -91,7 +91,7 @@ const Main = () => {
   }, [mainSectionRef]);
 
   return (
-    <MainSection ref={mainSectionRef}>
+    <MainSection ref={mainSectionRef} id="main">
       <Hello>Hello!</Hello>
       <Intro>
         I'm Filip, <span>Front-End Developer</span>

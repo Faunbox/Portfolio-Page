@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import "./App.css";
 
 //Firebase
@@ -18,16 +18,11 @@ import Footer from "./Components/Footer";
 // import Privacy from "./Components/Privacy";
 
 function App() {
-  const [ref, setRef] = useState({});
   const appRef = useRef(null);
-  useEffect(() => {
-    const app = appRef.current.children;
-    setRef(app);
-  }, [appRef]);
 
   return (
     <div ref={appRef} className="App">
-      <Menu menuRef={ref} />
+      <Menu menuRef={appRef} />
       <Main />
       <About />
       <Portfolio />

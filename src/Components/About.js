@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const AboutWrapper = styled.article`
@@ -19,7 +19,7 @@ const Paragraph = styled.p``;
 const About = () => {
   return (
     <>
-      <AboutWrapper>
+      <AboutWrapper id="about">
         <Paragraph>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident
           iste, perspiciatis quo consectetur ad veniam vel aperiam labore,
