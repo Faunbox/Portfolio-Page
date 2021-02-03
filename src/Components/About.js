@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
+
+import gsap from "gsap/";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const AboutWrapper = styled.article`
   /* position: relative; */
@@ -14,25 +19,56 @@ const AboutWrapper = styled.article`
   background-color: black;
 `;
 
-const Paragraph = styled.p``;
+const H2 = styled.h2`
+  margin: 0px 0 20px 0;
+`;
+
+const Paragraph = styled.p`
+  font-size: 1rem;
+`;
 
 const About = () => {
+  const aboutRef = useRef(null);
+
+  //Whole section animation
+
+  useEffect(() => {
+    const wrapperChildrens = [...aboutRef.current.children];
+    const tl = gsap.timeline();
+    wrapperChildrens.forEach((element) => {
+      tl.fromTo(
+        element,
+        1,
+        { autoAlpha: 0, y: "+=30" },
+        {
+          autoAlpha: 1,
+          y: 0,
+          scrollTrigger: {
+            trigger: aboutRef.current,
+            start: "top top",
+            markers: true,
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
+  });
+
   return (
     <>
-      <AboutWrapper id="about">
+      <AboutWrapper ref={aboutRef} id="about">
+        <H2>Some info about me</H2>
         <Paragraph>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident
-          iste, perspiciatis quo consectetur ad veniam vel aperiam labore,
-          possimus, enim tempora nulla voluptas ea eius atque aliquam porro
-          accusantium debitis nobis sunt consequatur. Excepturi voluptates
-          dignissimos inventore repudiandae quae, ipsum sint delectus
-          perferendis officiis neque nostrum accusamus sequi fuga iure mollitia
-          obcaecati similique nihil, architecto ratione doloribus placeat
-          consectetur rem tenetur? Explicabo eius minus ex tempore harum iusto
-          id repudiandae architecto perspiciatis magni magnam pariatur mollitia
-          sed, laboriosam quis facere? Exercitationem, praesentium in cum
-          molestiae error debitis repudiandae fugiat nobis perferendis quasi
-          eos, ab similique dolor animi recusandae nihil iusto!
+          My name is Filip Sojecki and I start my jurney to become Junior
+          Front-End Developer about year ago. During this time ive learned a lot
+          and programming became my passion. I spend all my free time to improve
+          my skills and discover new technologies.
+        </Paragraph>
+        <br />
+        <Paragraph>
+          As a person, im really huble and positive. I love physical exercise
+          (graduate PE student), traveling and of course computer science. At
+          this moment i live in Kraków.
         </Paragraph>
       </AboutWrapper>
     </>

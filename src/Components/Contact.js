@@ -22,22 +22,13 @@ const Wrapper = styled.div`
   min-height: 100vh;
   width: 100vw;
   padding: 5%;
-  color: white;
-  background-color: grey;
+  color: black;
+  background-color: white;
 `;
 
 const Form = styled.form`
   width: 100%;
 `;
-
-const useStyles = makeStyles({
-  root: {
-    cursor: "pointer",
-  },
-  success: {
-    backgroundColor: "green",
-  },
-});
 
 const Contact = () => {
   //submit state
@@ -46,6 +37,14 @@ const Contact = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   //Material Ui classes
+  const useStyles = makeStyles({
+    root: {
+      cursor: "pointer",
+    },
+    success: {
+      backgroundColor: "green",
+    },
+  });
   const classes = useStyles();
 
   // firebase upload contact form on submit
@@ -97,6 +96,7 @@ const Contact = () => {
           <Box margin={4} zIndex={0} position="relative">
             <TextField
               disabled={isSubmitted ? true : false}
+              className={classes.textfield}
               type="name"
               label="Your Name"
               placeholder="Enter Your Name"
@@ -108,6 +108,15 @@ const Contact = () => {
               helperText={formik.touched.name ? formik.errors.name : ""}
               onChange={formik.handleChange}
               value={formik.values.name}
+              InputLabelProps={{
+                root: classes.textfield,
+              }}
+              InputProps={{
+                root: classes.textfield,
+              }}
+              FormHelperTextProps={{
+                root: classes.textfield,
+              }}
             />
           </Box>
           <Box margin={4}>

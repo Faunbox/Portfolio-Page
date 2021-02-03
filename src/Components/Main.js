@@ -47,7 +47,7 @@ const Main = () => {
   //Arrow behavior
   const scrollDown = () => {
     const arrow = arrowRef.current;
-    gsap.to(window, { duration: 2, scrollTo: window.screen.height });
+    gsap.to(window, { duration: 1.3, scrollTo: window.screen.height });
     gsap.to(arrow, 1, { autoAlpha: 0, ease: "easeIn" });
   };
   useEffect(() => {
