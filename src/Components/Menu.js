@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 import styled from "styled-components";
 
+import Burger from "@animated-burgers/burger-rotate";
+import "@animated-burgers/burger-rotate/dist/styles.css";
+
 //Material UI Components
 import { makeStyles } from "@material-ui/core/styles";
-import MenuIcon from "@material-ui/icons/Menu";
-import ClearIcon from "@material-ui/icons/Clear";
-import IconButton from "@material-ui/core/IconButton";
 import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles({
@@ -112,10 +112,11 @@ const Menu = (props) => {
           ))}
         </Nav>
         <TransparentBg state={state_props}></TransparentBg>
-
-        <IconButton onClick={handleMenuClick} className={classes.large}>
-          {click ? <ClearIcon /> : <MenuIcon />}
-        </IconButton>
+        <Burger
+          onClick={handleMenuClick}
+          isOpen={click}
+          className={classes.large}
+        />
       </Wrapper>
     </>
   );

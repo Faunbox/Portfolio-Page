@@ -56,7 +56,7 @@ const Main = () => {
 
     //Arrow Icon Bouncing
     const tl = gsap.timeline({ repeat: -1, yoyo: true });
-    tl.fromTo(arrow, 1, { y: "+=30" }, { y: 10 });
+    tl.fromTo(arrow, 1, { y: "+=30", repeat: -1 }, { y: 10 });
 
     //Arrow Div functionality
     gsap.fromTo(
@@ -76,7 +76,7 @@ const Main = () => {
     );
   }, [arrowRef]);
 
-  //Animate MainSection on page loads
+  // Animate MainSection on page loads
   useEffect(() => {
     const mainSectionChilldrens = mainSectionRef.current.children;
     const tl = gsap.timeline({ duration: 1, ease: "ease-In" });

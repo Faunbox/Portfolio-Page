@@ -8,6 +8,10 @@ import "firebase/storage";
 import "firebase/firestore";
 import "firebase/auth";
 
+//gsap
+import gsap from "gsap/";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
 //Components
 import Main from "./Components/Main";
 import Menu from "./Components/Menu";
@@ -18,6 +22,8 @@ import Footer from "./Components/Footer";
 // import Privacy from "./Components/Privacy";
 
 function App() {
+  gsap.registerPlugin(ScrollTrigger);
+
   const appRef = useRef(null);
 
   return (

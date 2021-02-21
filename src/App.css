@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+body {
+  overscroll-behavior-y: contain;
+  user-select: none;
+  overflow-x: hidden;
+}
+
 .App {
   scroll-behavior: smooth;
   overflow-x: hidden;
