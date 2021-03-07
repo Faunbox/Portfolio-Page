@@ -22,16 +22,25 @@ const useStyles = makeStyles({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
+    filter: "grayscale(100%)",
+    "&:hover": {
+      filter: "none",
+    },
   },
 });
 
 const Drag = (props) => {
   const { url } = props;
+
   const styleProps = {
     url,
   };
+
   const classes = useStyles(styleProps);
-  const [{ xy }, set] = useSpring(() => ({ xy: [0, 0] }));
+
+  const [{ xy }, set] = useSpring(() => ({
+    xy: [0, 0],
+  }));
 
   const bind = useDrag(({ down, movement }) => {
     set({ xy: down ? movement : [0, 0] });
@@ -44,6 +53,7 @@ const Drag = (props) => {
         className={classes.div}
         style={{
           transform: xy.interpolate((x, y) => `translate3d(${x}px, ${y}px, 0)`),
+          zIndex: xy.interpolate((x, y) => (x !== 0 || y !== 0 ? 10 : 0)),
         }}
       />
     </>
