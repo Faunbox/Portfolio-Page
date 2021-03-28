@@ -35,6 +35,8 @@ const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   //Snackbar state
   const [isOpen, setIsOpen] = useState(false);
+  //Snackbar error message
+  const [isError, setIsError] = useState(false)
 
   //Material Ui classes
   const useStyles = makeStyles({
@@ -55,8 +57,8 @@ const Contact = () => {
     docRef
       .set(data)
       // .set(data)
-      .then(console.log("wysłano " + { data }))
-      .catch((error) => console.log("Błąd wysyłania") + error);
+      .then(setIsError(false), console.log(isError, isSubmitted))
+      .catch(setIsError(true));
   };
 
   //Formik
@@ -81,7 +83,6 @@ const Contact = () => {
         .required("Required"),
     }),
     onSubmit: (values, { resetForm }) => {
-      // alert(JSON.stringify(values, null, 2));
       uploadData(values);
       resetForm({});
       setIsSubmitted((prevstate) => !prevstate);
@@ -190,7 +191,7 @@ const Contact = () => {
             autoHideDuration={5000}
             open={!isOpen}
             onClose={() => setIsOpen((prevstate) => !prevstate)}
-            message="Succes!"
+            message= {isError ? "Something goes wrong!" : "Succes!"}
           />
         ) : null}
       </Wrapper>

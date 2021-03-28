@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import "./App.css";
 
 //Firebase
@@ -7,7 +7,7 @@ import "firebase/analytics";
 import "firebase/storage";
 import "firebase/firestore";
 import "firebase/auth";
-
+import {authAnony} from "./Components/firebase";
 //gsap
 import gsap from "gsap/";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -25,6 +25,11 @@ function App() {
   gsap.registerPlugin(ScrollTrigger);
 
   const appRef = useRef(null);
+
+  //Anony authorization
+  useEffect(() => {
+    authAnony()
+  })
 
   return (
     <div ref={appRef} className="App">
