@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 //Formik
@@ -12,6 +12,8 @@ import { makeStyles } from "@material-ui/core/styles";
 //firebase
 import firebase from "firebase/app";
 import "firebase/firestore";
+import {authAnony} from "./firebase";
+
 
 const Wrapper = styled.div`
   /* position: relative; */
@@ -23,7 +25,7 @@ const Wrapper = styled.div`
   width: 100vw;
   padding: 5%;
   color: black;
-  background-color: white;
+  background-color: black;
 `;
 
 const Form = styled.form`
@@ -35,7 +37,7 @@ const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   //Snackbar state
   const [isOpen, setIsOpen] = useState(false);
-  //Snackbar error message
+  //Snackbar error state
   const [isError, setIsError] = useState(false)
 
   //Material Ui classes
@@ -89,6 +91,11 @@ const Contact = () => {
     },
   });
 
+  //Anony authorization
+    useEffect(() => {
+      authAnony()
+    })
+
   return (
     <>
       <Wrapper id="contact">
@@ -96,7 +103,7 @@ const Contact = () => {
         <Form onSubmit={formik.handleSubmit}>
           <Box margin={4} zIndex={0} position="relative">
             <TextField
-              disabled={isSubmitted ? true : false}
+              disabled={isSubmitted ? true : false}     
               className={classes.textfield}
               type="name"
               label="Your Name"
@@ -191,7 +198,7 @@ const Contact = () => {
             autoHideDuration={5000}
             open={!isOpen}
             onClose={() => setIsOpen((prevstate) => !prevstate)}
-            message= {isError ? "Something goes wrong!" : "Succes!"}
+            message= {!isError ? "Something goes wrong!" : "Succes!"}
           />
         ) : null}
       </Wrapper>

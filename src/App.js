@@ -1,13 +1,15 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
+import {AppContext, defaultStates} from './Components/AppContext'
 
 //Firebase
+// eslint-disable-next-line no-unused-vars
 import firebase from "./Components/firebase";
 import "firebase/analytics";
 import "firebase/storage";
 import "firebase/firestore";
 import "firebase/auth";
-import {authAnony} from "./Components/firebase";
+
 //gsap
 import gsap from "gsap/";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -19,19 +21,39 @@ import Contact from "./Components/Contact";
 import About from "./Components/About";
 import Portfolio from "./Components/Portfolio";
 import Footer from "./Components/Footer";
-// import Privacy from "./Components/Privacy";
 
 function App() {
   gsap.registerPlugin(ScrollTrigger);
 
   const appRef = useRef(null);
 
-  //Anony authorization
+  //Context
+  const [isDarkTheme, setIsDarkTheme] = useState(defaultStates.isDarkTheme)
+
+  const toggleIsDarkTheme = () => {
+    setIsDarkTheme(prevValue => !prevValue)
+    console.log(isDarkTheme)
+  }
+
+  //Contact component animation
   useEffect(() => {
-    authAnony()
+    const refChildrens = appRef.current.children
+    const contactRef = [...refChildrens].find((element) => element.id === "contact")
+    gsap.to(contactRef, 1, {
+    backgroundColor:"white", 
+    scrollTrigger:{
+      trigger: contactRef,
+      // markers: true,
+      start: "top top+=60%",
+      toggleActions: "play none none reverse",
+    }})
   })
 
   return (
+    <AppContext.Provider value={{
+      isDarkTheme,
+      toggleIsDarkTheme,
+    }}>
     <div ref={appRef} className="App">
       <Menu menuRef={appRef} />
       <Main />
@@ -41,6 +63,7 @@ function App() {
       <Footer />
       {/* <Privacy /> */}
     </div>
+    </AppContext.Provider>
   );
 }
 

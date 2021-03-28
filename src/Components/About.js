@@ -37,20 +37,18 @@ const About = () => {
   //Whole section animation
   useEffect(() => {
     const wrapperChildrens = [...aboutRef.current.children];
-    const tl = gsap.timeline();
     wrapperChildrens.forEach((element) => {
-      tl.fromTo(
+      gsap.fromTo(
         element,
-        1.5,
-        { autoAlpha: 0, y: "+=30" },
+        1.5,        
+        { autoAlpha: 0, y: "+=30", },
         {
           autoAlpha: 1,
           y: 0,
           scrollTrigger: {
             trigger: aboutRef.current,
             start: "top center-=25%",
-            // markers: true,
-            // toggleActions: "play none none none",
+            toggleActions: "play none none reverse",
           },
         }
       );

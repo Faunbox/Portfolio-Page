@@ -1,4 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+
+// import { AppContext, defaultStates} from './AppContext';
 
 import styled from "styled-components";
 
@@ -40,9 +42,14 @@ const ArrowIcon = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const Main = () => {
+const Main = (props) => {
+  //Refs
   const mainSectionRef = useRef(null);
   const arrowRef = useRef(null);
+
+  //States
+
+  // const [isDarkTheme, setIsDarkTheme] = useState(defaultStates.darkTheme)
 
   //Arrow behavior
   const scrollDown = () => {
@@ -55,8 +62,8 @@ const Main = () => {
     const mainSection = mainSectionRef.current;
 
     //Arrow Icon Bouncing
-    const tl = gsap.timeline({ repeat: -1, yoyo: true });
-    tl.fromTo(arrow, 1, { y: "+=30", repeat: -1 }, { y: 10 });
+    const arrowTl= gsap.timeline({ repeat: -1, yoyo: true });
+    arrowTl.fromTo(arrow, 1, { y: "+=30", repeat: -1 }, { y: 10 });
 
     //Arrow Div functionality
     gsap.fromTo(

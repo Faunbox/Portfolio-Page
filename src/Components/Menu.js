@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext} from "react";
+import { AppContext } from './AppContext';
 
 import styled from "styled-components";
 
@@ -8,6 +9,11 @@ import "@animated-burgers/burger-rotate/dist/styles.css";
 //Material UI Components
 import { makeStyles } from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
+
+import gsap from 'gsap';
+import ScrollTrigger from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 
 const useStyles = makeStyles({
   ///Menu svg icon class names
@@ -19,7 +25,7 @@ const useStyles = makeStyles({
     "& svg": {
       position: "fixed",
       fontSize: 45,
-      color: "white", //// white
+      color: "white",
       transiton: "1s ease",
     },
   },
@@ -47,7 +53,7 @@ const Nav = styled.nav`
   border-bottom-right-radius: 500%; */
   z-index: 2;
   height: 100vh;
-  background-color: grey;
+  background-color: ${({theme}) => theme === "grey" ? "grey" : "white"};
   transform: ${({ state }) =>
     state === "active" ? "translate(0, 0)" : "translate(-100%, 0)"};
   transition: 0.8s ease;
@@ -70,6 +76,9 @@ const TransparentBg = styled.div`
 const Menu = (props) => {
   const classes = useStyles();
   const [click, setClick] = useState(false);
+
+  //Context
+  const { isDarkTheme, toggleIsDarkTheme } = useContext(AppContext)
 
   const navLinksArr = [
     { name: "Main Page", href: "/" },
@@ -95,21 +104,24 @@ const Menu = (props) => {
     click && setClick(false);
   };
 
-  const state_props = click ? "active" : "disactive";
+  const state_props = click ? "active" : "disactive"
+  const theme_props = isDarkTheme ? "grey" :"white"
 
   return (
     <>
       <Wrapper onClick={handleAwayClick} state={state_props}>
-        <Nav state={state_props}>
+        <Nav state={state_props} theme={theme_props}>
           {navLinksArr.map((navLink, id) => (
             <Link
               className={classes.link}
               href={navLink.href}
               key={id}
-              onClick={handleNavClick(id)}>
+              onClick={handleNavClick(id)}
+              >
               {navLink.name}
             </Link>
           ))}
+          <button onClick={toggleIsDarkTheme}>Zmiana tła</button>
         </Nav>
         <TransparentBg state={state_props}></TransparentBg>
         <Burger
