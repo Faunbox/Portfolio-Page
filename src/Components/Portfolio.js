@@ -1,5 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import styled from "styled-components";
+
+import {AppContext} from './AppContext';
 
 import Draggables from "./Cards";
 
@@ -15,15 +17,16 @@ const PortfolioWrapper = styled.section`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: black;
+  background-color: ${({theme}) => theme === true ? "black" : "white"};
 `;
 
 const H1 = styled.h1`
-  color: white;
+  color: ${({theme}) => theme === true ? "white" : "black"};
 `;
 
 const Portfolio = () => {
   const wrapperRef = useRef(null);
+  const {isDarkTheme} = useContext(AppContext)
 
   // useEffect(() => {
   //   const refChildrens = [...wrapperRef.current.children];
@@ -48,8 +51,8 @@ const Portfolio = () => {
 
   return (
     <>
-      <PortfolioWrapper ref={wrapperRef} id="portfolio">
-        <H1>My skills:</H1>
+      <PortfolioWrapper ref={wrapperRef} theme={isDarkTheme} id="portfolio">
+        <H1 theme={isDarkTheme}>My skills:</H1>
         <Draggables />
       </PortfolioWrapper>
     </>

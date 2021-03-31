@@ -3,13 +3,14 @@ import { AppContext } from './AppContext';
 
 import styled from "styled-components";
 
-import Burger from "@animated-burgers/burger-rotate";
-import "@animated-burgers/burger-rotate/dist/styles.css";
+
+//Burger menu icon
+import { HamburgerButton } from "react-hamburger-button";
 
 //Material UI Components
 import { makeStyles } from "@material-ui/core/styles";
-import Link from "@material-ui/core/Link";
 
+//gsap
 import gsap from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
@@ -18,21 +19,10 @@ gsap.registerPlugin(ScrollTrigger);
 const useStyles = makeStyles({
   ///Menu svg icon class names
   large: {
-    position: "fixed",
     top: 20,
-    left: 30,
+    left: 20,
     zIndex: 10,
-    "& svg": {
-      position: "fixed",
-      fontSize: 45,
-      color: "white",
-      transiton: "1s ease",
-    },
-  },
-  ///each Link class
-  link: {
-    padding: 15,
-    color: "black",
+    // borderRadius: 50,
   },
 });
 
@@ -49,14 +39,19 @@ const Nav = styled.nav`
   top: 0;
   left: 0;
   width: 40%;
-  /* border-top-right-radius: 500%;
-  border-bottom-right-radius: 500%; */
   z-index: 2;
   height: 100vh;
-  background-color: ${({theme}) => theme === "grey" ? "grey" : "white"};
+  background-color: ${({theme}) => theme === "true" ? "black" : "white"};
   transform: ${({ state }) =>
     state === "active" ? "translate(0, 0)" : "translate(-100%, 0)"};
   transition: 0.8s ease;
+`;
+const A = styled.a`
+padding: 15px;
+color: ${({theme}) => theme === "true" ? "rgb(240, 240, 240)" : "rgb(30, 30, 30)"};
+&:hover {
+  font-weight: bold;
+}
 `;
 
 const TransparentBg = styled.div`
@@ -66,7 +61,7 @@ const TransparentBg = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: ${({ state }) =>
-    state === "active" ? "rgba(0, 0, 0, 0.9)" : "transparent"};
+    state === "active" ? "rgba(0, 0, 0, 0.8)" : "transparent"};
   z-index: 1;
   transform: ${({ state }) =>
     state === "active" ? "translate(0, 0)" : "translate(100%, 0)"};
@@ -74,11 +69,14 @@ const TransparentBg = styled.div`
 `;
 
 const Menu = (props) => {
-  const classes = useStyles();
-  const [click, setClick] = useState(false);
-
   //Context
   const { isDarkTheme, toggleIsDarkTheme } = useContext(AppContext)
+
+  //MUi classes 
+  const classes = useStyles(props);
+
+  //State
+  const [click, setClick] = useState(false);
 
   const navLinksArr = [
     { name: "Main Page", href: "/" },
@@ -92,7 +90,7 @@ const Menu = (props) => {
 
   const handleNavClick = (id) => (e) => {
     e.preventDefault();
-    setClick((click) => !click);
+    handleMenuClick();
     let appRef = props.menuRef.current;
     appRef.children[id + 1].scrollIntoView({
       behavior: "smooth",
@@ -104,29 +102,32 @@ const Menu = (props) => {
     click && setClick(false);
   };
 
-  const state_props = click ? "active" : "disactive"
-  const theme_props = isDarkTheme ? "grey" :"white"
+  const state_props = click && "active";
+  const theme_props = click && "true";
 
   return (
     <>
       <Wrapper onClick={handleAwayClick} state={state_props}>
         <Nav state={state_props} theme={theme_props}>
           {navLinksArr.map((navLink, id) => (
-            <Link
-              className={classes.link}
+            <A
               href={navLink.href}
               key={id}
               onClick={handleNavClick(id)}
+              theme={theme_props}
               >
               {navLink.name}
-            </Link>
+            </A>
           ))}
           <button onClick={toggleIsDarkTheme}>Zmiana tła</button>
         </Nav>
         <TransparentBg state={state_props}></TransparentBg>
-        <Burger
+        <HamburgerButton 
           onClick={handleMenuClick}
-          isOpen={click}
+          animationDuration={0.7}
+          color={isDarkTheme ? "white" : "black"}
+          open={click}
+          strokeWidth={3}
           className={classes.large}
         />
       </Wrapper>

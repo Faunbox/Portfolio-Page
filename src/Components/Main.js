@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 
-// import { AppContext, defaultStates} from './AppContext';
+import { AppContext } from './AppContext';
 
 import styled from "styled-components";
 
@@ -18,10 +18,12 @@ const MainSection = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: black;
+  // color: white,
+  background-color: ${({theme}) => theme === true ? "black" : "white"};
   text-align: center;
-  color: white;
+  color: ${({theme}) => theme === true ? "white" : "black"};
   min-height: 100vh;
+  transition: 1s ease;
 `;
 
 const Hello = styled.h1`
@@ -35,21 +37,21 @@ const Intro = styled.h2`
 `;
 const ArrowIcon = styled.div`
   position: fixed;
-  color: white;
+  // color: white;
   top: 90%;
   left: 50%;
   z-index: 1;
   transform: translate(-50%, -50%);
 `;
 
-const Main = (props) => {
+const Main = () => {
   //Refs
   const mainSectionRef = useRef(null);
   const arrowRef = useRef(null);
 
   //States
+  const { isDarkTheme } = useContext(AppContext)
 
-  // const [isDarkTheme, setIsDarkTheme] = useState(defaultStates.darkTheme)
 
   //Arrow behavior
   const scrollDown = () => {
@@ -98,7 +100,7 @@ const Main = (props) => {
   }, [mainSectionRef]);
 
   return (
-    <MainSection ref={mainSectionRef} id="main">
+    <MainSection ref={mainSectionRef} theme={isDarkTheme} id="main">
       <Hello>Hello!</Hello>
       <Intro>
         I'm Filip, <span>Front-End Developer</span>

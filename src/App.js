@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef} from "react";
 import "./App.css";
-import {AppContext, defaultStates} from './Components/AppContext'
+
+//Context-API
+import AppProvider from './Components/AppContext'
 
 //Firebase
 // eslint-disable-next-line no-unused-vars
@@ -27,13 +29,7 @@ function App() {
 
   const appRef = useRef(null);
 
-  //Context
-  const [isDarkTheme, setIsDarkTheme] = useState(defaultStates.isDarkTheme)
 
-  const toggleIsDarkTheme = () => {
-    setIsDarkTheme(prevValue => !prevValue)
-    console.log(isDarkTheme)
-  }
 
   //Contact component animation
   useEffect(() => {
@@ -50,20 +46,16 @@ function App() {
   })
 
   return (
-    <AppContext.Provider value={{
-      isDarkTheme,
-      toggleIsDarkTheme,
-    }}>
-    <div ref={appRef} className="App">
-      <Menu menuRef={appRef} />
-      <Main />
-      <About />
-      <Portfolio />
-      <Contact />
-      <Footer />
-      {/* <Privacy /> */}
-    </div>
-    </AppContext.Provider>
+    <AppProvider>
+        <div ref={appRef} className="App">
+        <Menu menuRef={appRef} />
+        <Main />
+        <About />
+        <Portfolio />
+        <Contact />
+        <Footer />
+        </div>
+    </AppProvider>
   );
 }
 

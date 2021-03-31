@@ -1,8 +1,23 @@
-import { createContext } from 'react'
+import React, { createContext, useState } from 'react'
 
-export const defaultStates = { 
-    isDarkTheme: true,
-    toggleIsDarkTheme: {},
-}
+export const AppContext = createContext();
 
-export const AppContext = createContext(defaultStates);
+const AppProvider = ({children}) => {
+
+    const [isDarkTheme, setIsDarkTheme] = useState(true);
+
+    const toggleIsDarkTheme = () => {
+        setIsDarkTheme(prevValue => !prevValue)
+      }
+
+    return (
+        <AppContext.Provider value={{
+            isDarkTheme,
+            toggleIsDarkTheme
+        }}>
+            {children}
+        </AppContext.Provider>
+    )
+};
+
+export default AppProvider;

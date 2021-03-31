@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import styled from "styled-components";
+import {AppContext} from './AppContext'
 
 import gsap from "gsap/";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -7,7 +8,6 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutWrapper = styled.article`
-  /* position: relative; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,8 +15,8 @@ const AboutWrapper = styled.article`
   margin: 0 auto;
   min-height: 100vh;
   padding: 5%;
-  color: white;
-  background-color: black;
+  color: ${props => props.theme===true ? "white" : "black"};
+  background-color: ${props => props.theme===true ? "black" : "white"};
 `;
 
 const H2 = styled.h2`
@@ -33,6 +33,9 @@ const SecondParagraph = styled.p`
 
 const About = () => {
   const aboutRef = useRef(null);
+  const {isDarkTheme}=useContext(AppContext)
+
+
 
   //Whole section animation
   useEffect(() => {
@@ -57,10 +60,10 @@ const About = () => {
 
   return (
     <>
-      <AboutWrapper ref={aboutRef} id="about">
+      <AboutWrapper ref={aboutRef} id="about" theme={isDarkTheme}>
         <H2>Some info about me</H2>
         <Paragraph>
-          My name is Filip Sojecki and I start my journey to become Junior
+          My name is Filip Sojecki and I started my journey to become Junior
           Front-End Developer about year ago. During this time ive learned a lot
           and programming became my passion. I spend all my free time to improve
           my skills and discover new technologies.

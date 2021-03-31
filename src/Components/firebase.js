@@ -23,6 +23,7 @@ firebase.storage();
 firebase.auth();
 firebase.functions();
 
+
 export const authAnony = () => {
   return firebase.auth().signInAnonymously();
 };

@@ -7,8 +7,7 @@ import * as Yup from "yup";
 
 //Material ui
 import { Button, Box, TextField, Snackbar } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-
+import { makeStyles, ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 //firebase
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -25,13 +24,22 @@ const Wrapper = styled.div`
   width: 100vw;
   padding: 5%;
   color: black;
-  background-color: black;
+  background-color: white;
 `;
 
 const Form = styled.form`
   width: 100%;
 `;
-
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#000"
+    },
+    secondary: {
+      main: "#0044ff"
+    }
+  }
+})
 const Contact = () => {
   //submit state
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -101,11 +109,13 @@ const Contact = () => {
       <Wrapper id="contact">
         <h1 className="contact">Wanna contact?</h1>
         <Form onSubmit={formik.handleSubmit}>
-          <Box margin={4} zIndex={0} position="relative">
+          <ThemeProvider theme={theme}>
+          <Box  margin={4} zIndex={0} position="relative">
             <TextField
               disabled={isSubmitted ? true : false}     
               className={classes.textfield}
               type="name"
+              color="secondary"
               label="Your Name"
               placeholder="Enter Your Name"
               name="name"
@@ -133,6 +143,7 @@ const Contact = () => {
               name="email"
               type="email"
               label="Email"
+              color="secondary"
               placeholder="Enter Your Email"
               variant="outlined"
               error={formik.touched.email && Boolean(formik.errors.email)}
@@ -190,6 +201,7 @@ const Contact = () => {
               {!isSubmitted ? "Submit" : "Done!"}
             </Button>
           </Box>
+        </ThemeProvider>
         </Form>
         {isSubmitted ? (
           <Snackbar
