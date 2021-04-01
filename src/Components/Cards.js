@@ -4,6 +4,7 @@ import Drag from "./Drag";
 
 import styled from "styled-components";
 
+//Skills images
 import JS from "../Images/JS.png";
 import CSS from "../Images/CSS.png";
 import REACT from "../Images/REACT.png";
@@ -20,6 +21,8 @@ const Wrapper = styled.div`
 `;
 
 function Draggables() {
+
+  //Skills array
   const skills = [JS, CSS, HTML, REACT, MATERIAL, GSAP];
 
   // Bind it to a component

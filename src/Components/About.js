@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useContext } from "react";
+import { gsapAnimation } from './hooks'
 import styled from "styled-components";
 import {AppContext} from './AppContext'
 
@@ -31,31 +32,15 @@ const SecondParagraph = styled.p`
   font-size: 1rem;
 `;
 
+
 const About = () => {
   const aboutRef = useRef(null);
-  const {isDarkTheme}=useContext(AppContext)
-
-
+  const {isDarkTheme}=useContext(AppContext);
 
   //Whole section animation
   useEffect(() => {
     const wrapperChildrens = [...aboutRef.current.children];
-    wrapperChildrens.forEach((element) => {
-      gsap.fromTo(
-        element,
-        1.5,        
-        { autoAlpha: 0, y: "+=30", },
-        {
-          autoAlpha: 1,
-          y: 0,
-          scrollTrigger: {
-            trigger: aboutRef.current,
-            start: "top center-=25%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    });
+    gsapAnimation(wrapperChildrens, aboutRef.current, "top", "center-=20%")
   });
 
   return (

@@ -40,7 +40,7 @@ function App() {
     scrollTrigger:{
       trigger: contactRef,
       // markers: true,
-      start: "top top+=60%",
+      start: "top center-=20%",
       toggleActions: "play none none reverse",
     }})
   })

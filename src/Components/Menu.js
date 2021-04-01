@@ -128,6 +128,7 @@ const Menu = (props) => {
           color={isDarkTheme ? "white" : "black"}
           open={click}
           strokeWidth={3}
+          height={25}
           className={classes.large}
         />
       </Wrapper>

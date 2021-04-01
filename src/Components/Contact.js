@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 //Formik
@@ -12,6 +12,7 @@ import { makeStyles, ThemeProvider, createMuiTheme } from "@material-ui/core/sty
 import firebase from "firebase/app";
 import "firebase/firestore";
 import {authAnony} from "./firebase";
+import { gsapAnimation } from "./hooks";
 
 
 const Wrapper = styled.div`
@@ -24,7 +25,7 @@ const Wrapper = styled.div`
   width: 100vw;
   padding: 5%;
   color: black;
-  background-color: white;
+  background-color: black;
 `;
 
 const Form = styled.form`
@@ -47,6 +48,8 @@ const Contact = () => {
   const [isOpen, setIsOpen] = useState(false);
   //Snackbar error state
   const [isError, setIsError] = useState(false)
+  //Wrapper Ref
+  const wrapperRef = useRef(null)
 
   //Material Ui classes
   const useStyles = makeStyles({
@@ -101,12 +104,14 @@ const Contact = () => {
 
   //Anony authorization
     useEffect(() => {
-      authAnony()
+      authAnony();
+      const wrapperChildrens = [...wrapperRef.current.children];
+      gsapAnimation(wrapperChildrens, wrapperRef.current, "top", "center -=20%")
     })
 
   return (
     <>
-      <Wrapper id="contact">
+      <Wrapper id="contact" ref={wrapperRef}>
         <h1 className="contact">Wanna contact?</h1>
         <Form onSubmit={formik.handleSubmit}>
           <ThemeProvider theme={theme}>

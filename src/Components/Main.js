@@ -52,7 +52,6 @@ const Main = () => {
   //States
   const { isDarkTheme } = useContext(AppContext)
 
-
   //Arrow behavior
   const scrollDown = () => {
     const arrow = arrowRef.current;

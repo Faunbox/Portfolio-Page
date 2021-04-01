@@ -1,7 +1,8 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef, useContext, useEffect } from "react";
 import styled from "styled-components";
 
 import {AppContext} from './AppContext';
+import {gsapAnimation} from './hooks'
 
 import Draggables from "./Cards";
 
@@ -28,26 +29,11 @@ const Portfolio = () => {
   const wrapperRef = useRef(null);
   const {isDarkTheme} = useContext(AppContext)
 
-  // useEffect(() => {
-  //   const refChildrens = [...wrapperRef.current.children];
-  //   const tl = gsap.timeline({ duration: 1 });
-  //   refChildrens.forEach((element) => {
-  //     tl.fromTo(
-  //       element,
-  //       { autoAlpha: 0, y: "+=30" },
-  //       {
-  //         autoAlpha: 1,
-  //         y: 0,
-  //         scrollTrigger: {
-  //           trigger: wrapperRef.current,
-  //           start: "top center-=25%",
-  //           markers: true,
-  //           // toggleActions: "play play play play",
-  //         },
-  //       }
-  //     );
-  //   });
-  // }, []);
+  useEffect(() => {
+    const refChildrens = [...wrapperRef.current.children]; 
+    gsapAnimation(refChildrens, wrapperRef.current, "top", "center -=20%")  
+    ;
+  }, []);
 
   return (
     <>
