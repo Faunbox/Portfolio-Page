@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { WrapperStyle } from "../GlobalCss/GlobalStyles";
 
 import GitHubIcon from "@material-ui/icons/GitHub";
 import PhoneIcon from "@material-ui/icons/Phone";
@@ -7,10 +8,9 @@ import EmailIcon from "@material-ui/icons/Email";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-const Wrapper = styled.footer`
+const FooterWrapper = styled.footer`
+  ${WrapperStyle}
   position: relative;
-  display: flex;
-  align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
   height: auto;
@@ -52,19 +52,20 @@ const FooterA = styled.a`
 const Footer = () => {
   const useStyles = makeStyles({
     icon: {
-      fontSize: "1rem",
+      fontSize: "1.6rem",
       margin: "0 3px 0 0",
     },
   });
   const classes = useStyles();
   return (
-    <Wrapper>
+    <FooterWrapper>
       <FooterUl>
         <FooterLi>
           <FooterA
             href="https://github.com/Faunbox"
             rel="noreferrer"
-            target="_blank">
+            target="_blank"
+          >
             <GitHubIcon className={classes.icon} />
             Github
           </FooterA>
@@ -79,14 +80,15 @@ const Footer = () => {
           <FooterA
             href="mailto:faunbox2@gmail.com"
             rel="noreferrer"
-            target="_blank">
+            target="_blank"
+          >
             <EmailIcon className={classes.icon} />
             Email
           </FooterA>
         </FooterLi>
       </FooterUl>
       <FooterSmall>© 2021 Filip Sojecki</FooterSmall>
-    </Wrapper>
+    </FooterWrapper>
   );
 };
 

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const gsapAnimation = (element, trigger, triggerStart, triggerEnd) => {
+const gsapAnimation = (element, trigger, triggerStart, triggerEnd) => {
     element.forEach((element) => {
       gsap.fromTo(
         element,
@@ -22,6 +22,7 @@ export const gsapAnimation = (element, trigger, triggerStart, triggerEnd) => {
       );
     });  
   }
+
   
   gsapAnimation.propTypes = {
     element: PropTypes.array,
@@ -29,3 +30,4 @@ export const gsapAnimation = (element, trigger, triggerStart, triggerEnd) => {
     triggerStart: PropTypes.string,
     triggerEnd: PropTypes.string,
   }.isRequired
+  export { gsapAnimation }

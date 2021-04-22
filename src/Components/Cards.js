@@ -21,11 +21,9 @@ const Wrapper = styled.div`
 `;
 
 function Draggables() {
-
   //Skills array
   const skills = [JS, CSS, HTML, REACT, MATERIAL, GSAP];
 
-  // Bind it to a component
   return (
     <>
       <Wrapper>

@@ -1,16 +1,14 @@
-import { useEffect, useRef} from "react";
-import "./App.css";
+import React, { useRef } from "react";
 
 //Context-API
-import AppProvider from './Components/AppContext'
+import AppProvider from "./Components/AppContext";
 
 //Firebase
 // eslint-disable-next-line no-unused-vars
 import firebase from "./Components/firebase";
-import "firebase/analytics";
-import "firebase/storage";
-import "firebase/firestore";
-import "firebase/auth";
+
+//GlobalStyles
+import { GlobalStyles } from "./GlobalCss/GlobalStyles";
 
 //gsap
 import gsap from "gsap/";
@@ -29,32 +27,17 @@ function App() {
 
   const appRef = useRef(null);
 
-
-
-  //Contact component animation
-  useEffect(() => {
-    const refChildrens = appRef.current.children
-    const contactRef = [...refChildrens].find((element) => element.id === "contact")
-    gsap.to(contactRef, 1, {
-    backgroundColor:"white", 
-    scrollTrigger:{
-      trigger: contactRef,
-      // markers: true,
-      start: "top center-=20%",
-      toggleActions: "play none none reverse",
-    }})
-  })
-
   return (
     <AppProvider>
-        <div ref={appRef} className="App">
+      <GlobalStyles />
+      <div ref={appRef} className="App">
         <Menu menuRef={appRef} />
-        <Main />
+        <Main menuRef={appRef} />
         <About />
         <Portfolio />
         <Contact />
         <Footer />
-        </div>
+      </div>
     </AppProvider>
   );
 }

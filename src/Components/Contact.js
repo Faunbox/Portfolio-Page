@@ -1,5 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { AppContext } from "./AppContext";
 import styled from "styled-components";
+import { ThemedWrapperStyle } from "../GlobalCss/GlobalStyles";
 
 //Formik
 import { useFormik } from "formik";
@@ -7,60 +9,58 @@ import * as Yup from "yup";
 
 //Material ui
 import { Button, Box, TextField, Snackbar } from "@material-ui/core";
-import { makeStyles, ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 //firebase
 import firebase from "firebase/app";
 import "firebase/firestore";
-import {authAnony} from "./firebase";
-import { gsapAnimation } from "./hooks";
+import { authAnony } from "./firebase";
+import { gsapAnimation } from "../Hooks/hooks";
 
-
-const Wrapper = styled.div`
-  /* position: relative; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+const ContactWrapper = styled.div`
+  ${ThemedWrapperStyle}
   width: 100vw;
   padding: 5%;
-  color: black;
-  background-color: black;
 `;
 
 const Form = styled.form`
   width: 100%;
+  font-size: 1.6rem;
 `;
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#000"
-    },
-    secondary: {
-      main: "#0044ff"
-    }
+
+const FormField = styled(TextField)`
+  color: white;
+  background-color: white;
+  border-color: black;
+
+  label {
+    font-size: 1.4rem;
   }
-})
+  p {
+    font-size: 1.1rem;
+  }
+`;
+
+const H1 = styled.h1`
+  color: ${({ theme }) => (theme === true ? "white" : "black")};
+`;
+
+const SendButton = styled(Button)`
+  background-color: ${({ theme }) => (theme === true ? "white" : "black")};
+  color: ${({ theme }) => (theme === true ? "black" : "white")};
+  border-color: black;
+  font-size: 3rem;
+`;
+
 const Contact = () => {
   //submit state
   const [isSubmitted, setIsSubmitted] = useState(false);
   //Snackbar state
   const [isOpen, setIsOpen] = useState(false);
   //Snackbar error state
-  const [isError, setIsError] = useState(false)
+  const [isError, setIsError] = useState(false);
+  //Context
+  const { isDarkTheme } = useContext(AppContext);
   //Wrapper Ref
-  const wrapperRef = useRef(null)
-
-  //Material Ui classes
-  const useStyles = makeStyles({
-    root: {
-      cursor: "pointer",
-    },
-    success: {
-      backgroundColor: "green",
-    },
-  });
-  const classes = useStyles();
+  const wrapperRef = useRef(null);
 
   // firebase upload contact form on submit
   const uploadData = (data) => {
@@ -69,7 +69,6 @@ const Contact = () => {
 
     docRef
       .set(data)
-      // .set(data)
       .then(setIsError(false), console.log(isError, isSubmitted))
       .catch(setIsError(true));
   };
@@ -103,24 +102,21 @@ const Contact = () => {
   });
 
   //Anony authorization
-    useEffect(() => {
-      authAnony();
-      const wrapperChildrens = [...wrapperRef.current.children];
-      gsapAnimation(wrapperChildrens, wrapperRef.current, "top", "center -=20%")
-    })
+  useEffect(() => {
+    authAnony();
+    const wrapperChildrens = [...wrapperRef.current.children];
+    gsapAnimation(wrapperChildrens, wrapperRef.current, "top", "center-=20%");
+  }, []);
 
   return (
     <>
-      <Wrapper id="contact" ref={wrapperRef}>
-        <h1 className="contact">Wanna contact?</h1>
-        <Form onSubmit={formik.handleSubmit}>
-          <ThemeProvider theme={theme}>
-          <Box  margin={4} zIndex={0} position="relative">
-            <TextField
-              disabled={isSubmitted ? true : false}     
-              className={classes.textfield}
+      <ContactWrapper id="contact" ref={wrapperRef} theme={isDarkTheme}>
+        <H1 theme={isDarkTheme}>Wanna contact?</H1>
+        <Form onSubmit={formik.handleSubmit} theme={isDarkTheme}>
+          <Box margin={4}>
+            <FormField
+              disabled={isSubmitted ? true : false}
               type="name"
-              color="secondary"
               label="Your Name"
               placeholder="Enter Your Name"
               name="name"
@@ -131,28 +127,18 @@ const Contact = () => {
               helperText={formik.touched.name ? formik.errors.name : ""}
               onChange={formik.handleChange}
               value={formik.values.name}
-              InputLabelProps={{
-                root: classes.textfield,
-              }}
-              InputProps={{
-                root: classes.textfield,
-              }}
-              FormHelperTextProps={{
-                root: classes.textfield,
-              }}
             />
           </Box>
           <Box margin={4}>
-            <TextField
+            <FormField
               disabled={isSubmitted ? true : false}
-              name="email"
               type="email"
+              name="email"
               label="Email"
-              color="secondary"
               placeholder="Enter Your Email"
               variant="outlined"
-              error={formik.touched.email && Boolean(formik.errors.email)}
               fullWidth
+              error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={formik.touched.email ? formik.errors.email : ""}
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -160,11 +146,11 @@ const Contact = () => {
             />
           </Box>
           <Box margin={4}>
-            <TextField
+            <FormField
               disabled={isSubmitted ? true : false}
               type="subject"
-              label="Subject"
               name="subject"
+              label="Subject"
               placeholder="Enter your subject here"
               variant="outlined"
               fullWidth
@@ -176,8 +162,7 @@ const Contact = () => {
             />
           </Box>
           <Box margin={4}>
-            <TextField
-              className={classes.root}
+            <FormField
               disabled={isSubmitted ? true : false}
               rows="10"
               type="text"
@@ -190,35 +175,35 @@ const Contact = () => {
               helperText={formik.touched.message ? formik.errors.message : ""}
               onBlur={formik.handleBlur}
               error={formik.touched.message && Boolean(formik.errors.message)}
-              size="medium"
+              // size="medium"
               onChange={formik.handleChange}
               value={formik.values.message}
             />
           </Box>
           <Box margin={1}>
-            <Button
+            <SendButton
+              theme={isDarkTheme}
               disabled={isSubmitted ? true : false}
               type="submit"
               variant="contained"
               color="primary"
               fullWidth
-              disableElevation>
+              disableElevation
+            >
               {!isSubmitted ? "Submit" : "Done!"}
-            </Button>
+            </SendButton>
           </Box>
-        </ThemeProvider>
         </Form>
         {isSubmitted ? (
           <Snackbar
-            className={classes.success}
             anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
             autoHideDuration={5000}
             open={!isOpen}
             onClose={() => setIsOpen((prevstate) => !prevstate)}
-            message= {!isError ? "Something goes wrong!" : "Succes!"}
+            message={!isError ? "Something goes wrong!" : "Succes!"}
           />
         ) : null}
-      </Wrapper>
+      </ContactWrapper>
     </>
   );
 };

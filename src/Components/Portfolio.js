@@ -1,8 +1,9 @@
 import React, { useRef, useContext, useEffect } from "react";
 import styled from "styled-components";
+import { ThemedWrapperStyle } from "../GlobalCss/GlobalStyles";
 
-import {AppContext} from './AppContext';
-import {gsapAnimation} from './hooks'
+import { AppContext } from "./AppContext";
+import { gsapAnimation } from "../Hooks/hooks";
 
 import Draggables from "./Cards";
 
@@ -12,27 +13,20 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const PortfolioWrapper = styled.section`
-  /* position: relative; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: ${({theme}) => theme === true ? "black" : "white"};
+  ${ThemedWrapperStyle}
 `;
 
 const H1 = styled.h1`
-  color: ${({theme}) => theme === true ? "white" : "black"};
+  color: ${({ theme }) => (theme === true ? "white" : "black")};
 `;
 
 const Portfolio = () => {
   const wrapperRef = useRef(null);
-  const {isDarkTheme} = useContext(AppContext)
+  const { isDarkTheme } = useContext(AppContext);
 
   useEffect(() => {
-    const refChildrens = [...wrapperRef.current.children]; 
-    gsapAnimation(refChildrens, wrapperRef.current, "top", "center -=20%")  
-    ;
+    const refChildrens = [...wrapperRef.current.children];
+    gsapAnimation(refChildrens, wrapperRef.current, "top", "center -=20%");
   }, []);
 
   return (

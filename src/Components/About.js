@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useContext } from "react";
-import { gsapAnimation } from './hooks'
+import { gsapAnimation } from "../Hooks/hooks";
 import styled from "styled-components";
-import {AppContext} from './AppContext'
+import { ThemedWrapperStyle } from "../GlobalCss/GlobalStyles";
+import { AppContext } from "./AppContext";
 
 import gsap from "gsap/";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -9,38 +10,31 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutWrapper = styled.article`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${ThemedWrapperStyle}
   margin: 0 auto;
-  min-height: 100vh;
   padding: 5%;
-  color: ${props => props.theme===true ? "white" : "black"};
-  background-color: ${props => props.theme===true ? "black" : "white"};
 `;
 
 const H2 = styled.h2`
   margin: 0px 0 20px 0;
 `;
 
-const Paragraph = styled.p`
-  font-size: 1rem;
-`;
+const Paragraph = styled.p``;
 const SecondParagraph = styled.p`
   margin-top: 30px;
-  font-size: 1rem;
 `;
 
-
 const About = () => {
+  //Ref
   const aboutRef = useRef(null);
-  const {isDarkTheme}=useContext(AppContext);
+
+  //State
+  const { isDarkTheme } = useContext(AppContext);
 
   //Whole section animation
   useEffect(() => {
     const wrapperChildrens = [...aboutRef.current.children];
-    gsapAnimation(wrapperChildrens, aboutRef.current, "top", "center-=20%")
+    gsapAnimation(wrapperChildrens, aboutRef.current, "top", "center-=20%");
   });
 
   return (
