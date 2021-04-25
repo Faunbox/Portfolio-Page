@@ -35,6 +35,6 @@ export const ThemedWrapperStyle = css`
   align-items: center;
   font-size: 1.6rem;
   background-color: ${({ theme }) => (theme === true ? "black" : "white")};
-  color: ${(props) => (props.theme === true ? "white" : "black")};
+  color: ${({ theme }) => (theme === true ? "white" : "black")};
   min-height: 100vh;
 `;

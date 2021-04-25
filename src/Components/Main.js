@@ -55,9 +55,6 @@ const ThemeSwitch = styled(Switch)`
   .MuiSwitch-track {
     background-color: white;
   }
-  .MuiSwitch-colorSecondary.Mui-checked {
-    background-color: black;
-  }
 `;
 
 const Main = () => {
@@ -71,9 +68,11 @@ const Main = () => {
   //Arrow behavior
   const scrollDownArrow = () => {
     const arrow = arrowRef.current;
-    gsap.to(window, 1.3, { scrollTo: window.screen.height });
-    gsap.to(arrow, 1, { autoAlpha: 0, ease: "easeIn" });
+    let windowHeight = window.screen.height;
+    gsap.to(window, 1.3, { delay: 0, scrollTo: windowHeight });
+    gsap.to(arrow, 1.3, { autoAlpha: 0, ease: "easeIn" });
   };
+
   useEffect(() => {
     const arrow = arrowRef.current;
     const mainSection = mainSectionRef.current;
@@ -103,7 +102,7 @@ const Main = () => {
   useEffect(() => {
     const mainSectionChilldrens = mainSectionRef.current.children;
 
-    const tl = gsap.timeline({ duration: 1, ease: "ease-In" });
+    const tl = gsap.timeline({ duration: 1, delay: 0.3, ease: "ease-In" });
     [...mainSectionChilldrens].forEach((element) => {
       tl.fromTo(
         element,

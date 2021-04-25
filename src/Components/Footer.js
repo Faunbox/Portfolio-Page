@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { WrapperStyle } from "../GlobalCss/GlobalStyles";
 
@@ -7,6 +7,8 @@ import PhoneIcon from "@material-ui/icons/Phone";
 import EmailIcon from "@material-ui/icons/Email";
 
 import { makeStyles } from "@material-ui/core/styles";
+
+import { gsapAnimation } from "../Hooks/hooks";
 
 const FooterWrapper = styled.footer`
   ${WrapperStyle}
@@ -42,11 +44,17 @@ const FooterLi = styled.li`
   cursor: pointer;
 `;
 
-const FooterSmall = styled.small``;
+const FooterSmall = styled.small`
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 25px;
+  font-size: 0.9rem;
+`;
 
 const FooterA = styled.a`
   text-decoration: none;
   color: white;
+  font-size: 1.6rem;
 `;
 
 const Footer = () => {
@@ -57,8 +65,16 @@ const Footer = () => {
     },
   });
   const classes = useStyles();
+
+  const footerRef = useRef(null);
+
+  useEffect(() => {
+    const footerChildrens = [...footerRef.current.children];
+    gsapAnimation(footerChildrens, footerRef.current, "top", "bottom-=10%");
+  }, []);
+
   return (
-    <FooterWrapper>
+    <FooterWrapper ref={footerRef}>
       <FooterUl>
         <FooterLi>
           <FooterA

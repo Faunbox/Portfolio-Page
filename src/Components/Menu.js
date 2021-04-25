@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import { AppContext } from "./AppContext";
 
 import styled from "styled-components";
@@ -69,6 +69,9 @@ const Menu = ({ menuRef }) => {
   //State
   const [click, setClick] = useState(false);
 
+  //Ref
+  const burgerRef = useRef(null);
+
   const navLinksArr = [
     { name: "Main Page", href: "/" },
     { name: "About Me", href: "/about" },
@@ -93,9 +96,18 @@ const Menu = ({ menuRef }) => {
     click && setClick(false);
   };
 
+  useEffect(() => {
+    const burger = burgerRef.current.lastChild;
+    gsap.fromTo(
+      burger,
+      { autoAlpha: 0, y: "+=30" },
+      { autoAlpha: 1, y: 0, duration: 1, ease: "ease-In" }
+    );
+  }, [burgerRef]);
+
   return (
     <>
-      <Wrapper onClick={handleAwayClick} state={click}>
+      <Wrapper onClick={handleAwayClick} state={click} ref={burgerRef}>
         <Nav state={click} theme={isDarkTheme}>
           {navLinksArr.map((navLink, id) => (
             <A
