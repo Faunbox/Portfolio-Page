@@ -2,10 +2,14 @@ import "./sass/index.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Ui from "./js/Ui";
+import Menu from "./js/Menu";
 
 class App extends Ui {
   #hamburger = null;
   nav = null;
+  about = null;
+
+  menu = new Menu();
 
   handleElements() {
     this.#hamburger = this.getElement(this.UiSelectors.hamburger);
@@ -13,14 +17,18 @@ class App extends Ui {
   }
 
   addEventListeners() {
-    this.#hamburger.addEventListener("click", () =>
-      this.nav.classList.toggle("menu__active")
-    );
+    this.#hamburger.addEventListener("click", () => {
+      this.nav.classList.toggle("menu__active");
+    });
+    document.body.onresize = () => {
+      this.menu.getHeight();
+    };
   }
 
   init() {
     this.handleElements();
     this.addEventListeners();
+    this.menu.init()
   }
 }
 

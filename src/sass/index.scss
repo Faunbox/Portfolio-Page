@@ -1,6 +1,7 @@
 @import "variables";
 @import "asideMenu";
 @import "info-page";
+@import "about";
 
 * {
   margin: 0;
@@ -9,9 +10,11 @@
 }
 
 body {
+  position: relative;
   height: 200vh;
   font-family: "Lato", sans-serif;
   font-size: $font-size;
+  padding: 0 $padding-phone;
 }
 .background {
   position: fixed;

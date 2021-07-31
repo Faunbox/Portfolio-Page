@@ -4,6 +4,20 @@
   left: 0;
   margin: 20px;
   z-index: 5;
+
+  .menu__hamburger-svg {
+    width: 20px;
+    height: 20px;
+
+    @media (min-width: 375px) {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  @media (min-width: 736px) {
+    display: none;
+  }
 }
 
 .menu {
@@ -17,20 +31,32 @@
   justify-content: center;
   background-color: $aside-menu-phone-bgc;
   transition: 0.5s ease-in;
-  transform: translateX($aside-menu-width-phone-screen * -1);
+  transform: translateX(110vw * -1);
   box-shadow: 0 8px 32px 0 rgba(104, 104, 104, 0.37);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(2.5px);
   border-bottom-right-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  z-index: 5;
+
+  @media (min-width: 568px) {
+    width: $aside-menu-width-tablet-screen;
+  }
+
+  @media (min-width: 736px) {
+    width: $aside-menu-width-tablet-screen;
+    transform: translateX(0);
+    height: 100vh;
+
+  }
 
   ul {
     list-style: none;
     padding: 0;
 
     li {
-      margin: 10px;
+      margin: 2rem;
 
       :hover {
         color: #444;
