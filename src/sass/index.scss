@@ -1,0 +1,39 @@
+@import "variables";
+@import "asideMenu";
+@import "info-page";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 200vh;
+  font-family: "Lato", sans-serif;
+  font-size: $font-size;
+}
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+
+  background: linear-gradient(-45deg, #ebc8a0, #f3eef0, #c0cdd1, #545355);
+  background-size: 200% 200%;
+  animation: gradient 5s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

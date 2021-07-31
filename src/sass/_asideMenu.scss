@@ -1,0 +1,50 @@
+.menu__hamburger {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 20px;
+  z-index: 5;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: $aside-menu-width-phone-screen;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $aside-menu-phone-bgc;
+  transition: 0.5s ease-in;
+  transform: translateX($aside-menu-width-phone-screen * -1);
+  box-shadow: 0 8px 32px 0 rgba(104, 104, 104, 0.37);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border-bottom-right-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 1.5rem;
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin: 10px;
+
+      :hover {
+        color: #444;
+      }
+
+      a {
+        color: #111;
+        text-decoration: none;
+      }
+    }
+  }
+}
+.menu__active {
+  top: 0;
+  left: 0;
+  transform: translateX(0);
+}
