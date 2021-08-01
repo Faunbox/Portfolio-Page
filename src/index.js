@@ -1,6 +1,7 @@
 import "./sass/index.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import firebase from "firebase";
 import Ui from "./js/Ui";
 import Menu from "./js/Menu";
 

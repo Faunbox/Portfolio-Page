@@ -1,0 +1,17 @@
+.contact {
+  .contact__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .contact__form {
+      width: 100%;
+      margin: 1rem;
+
+      @media (min-width:736px) {
+          width: 60%;
+          margin: 3rem;
+      }
+    }
+  }
+}

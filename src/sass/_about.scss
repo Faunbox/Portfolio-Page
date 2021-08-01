@@ -1,4 +1,8 @@
 .about {
-  position: absolute;
   font-size: 1.2rem;
+  line-height: 2rem;
+
+  .about__header {
+    margin: 3rem 0;
+  }
 }
