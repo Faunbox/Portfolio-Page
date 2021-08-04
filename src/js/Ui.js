@@ -2,6 +2,7 @@ export default class Ui {
   UiSelectors = {
     nav: ".menu",
     hamburger: ".menu__hamburger",
+    skills: ".skills",
     about: ".about",
   };
 

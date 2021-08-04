@@ -42,6 +42,21 @@
           <a href="/" class="menu__list-element-link">Contact</a>
         </li>
       </ul>
+      <div class="form-check form-switch">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="flexSwitchCheckChecked"
+          checked
+        />
+        <label class="form-check-label" for="flexSwitchCheckChecked"
+          >Theme</label
+        >
+      </div>
+      <!-- <div class="menu__socials-wrapper">
+        <div class="menu__socials-content">git</div>
+        <div class="menu__socials-content">linked</div>
+      </div> -->
     </nav>
 
     <main>
@@ -67,77 +82,124 @@
       </article>
       <article class="projects">
         <h1 class="projects__header">Some of me projects</h1>
-        <div class="card" style="width: 18rem">
-          <img src="..." class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </p>
+        <div class="projects__wrapper">
+          <div class="card" style="width: 18rem">
+            <img src="..." class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+            </div>
+            <div class="card-body">
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
           </div>
-          <div class="card-body">
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
+          <div class="card" style="width: 18rem">
+            <img src="..." class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+            </div>
+            <div class="card-body">
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem">
+            <img src="..." class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+            </div>
+            <div class="card-body">
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
           </div>
         </div>
       </article>
       <article class="skills">
         <h1 class="skills__header">My techstack</h1>
         <div class="skills__wrapper">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et architecto ex ut ipsam neque molestias dolor temporibus nam odio corporis, at perferendis autem officia facere quidem quo porro libero praesentium iure dolore iusto nisi. Excepturi nobis aliquam nulla est soluta non autem minima reiciendis, necessitatibus nihil explicabo tenetur optio iste veritatis modi reprehenderit fuga similique distinctio, labore provident ea quo ex voluptates ut. Asperiores, consequatur, aliquam est eveniet deleniti expedita obcaecati quam totam ducimus delectus doloremque fugit et sint mollitia eaque molestias suscipit. Itaque voluptatem nesciunt incidunt, ut facere laudantium ipsam consequuntur dolorem mollitia unde ipsum nisi assumenda! Dolores, consequuntur.</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et
+            architecto ex ut ipsam neque molestias dolor temporibus nam odio
+            corporis, at perferendis autem officia facere quidem quo porro
+            libero praesentium iure dolore iusto nisi. Excepturi nobis aliquam
+            nulla est soluta non autem minima reiciendis, necessitatibus nihil
+            explicabo tenetur optio iste veritatis modi reprehenderit fuga
+            similique distinctio, labore provident ea quo ex voluptates ut.
+            Asperiores, consequatur, aliquam est eveniet deleniti expedita
+            obcaecati quam totam ducimus delectus doloremque fugit et sint
+            mollitia eaque molestias suscipit. Itaque voluptatem nesciunt
+            incidunt, ut facere laudantium ipsam consequuntur dolorem mollitia
+            unde ipsum nisi assumenda! Dolores, consequuntur.
+          </p>
         </div>
       </article>
       <article class="contact">
         <h1 class="contact__header">Get in touch</h1>
         <div class="contact__wrapper">
-          <form class="contact__form">
+          <form
+            class="contact__form"
+            action="https://formsubmit.io/send/6826c46e-a3f6-44be-b312-249d32576c1f"
+            method="POST"
+          >
+            <input name="_formsubmit_id" type="text" style="display: none" />
+            <input
+              name="_redirect"
+              type="hidden"
+              id="name"
+              value="https://google.pl"
+            />
             <div class="mb-3">
-              <label for="name" class="form-label"
-                >Name</label
-              >
+              <label for="name" class="form-label">Name</label>
               <input
                 type="text"
                 class="form-control"
+                name="name"
                 id="name"
                 aria-describedby="name"
               />
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label"
-                >Email</label
-              >
+              <label for="email" class="form-label">Email</label>
               <input
                 type="email"
+                name="email"
                 class="form-control"
                 id="email"
               />
             </div>
             <div class="mb-3">
-              <label for="sumject" class="form-label"
-                >Subject</label
-              >
+              <label for="message" class="form-label">Message</label>
               <input
                 type="text"
-                class="form-control"
-                id="subject"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="message" class="form-label"
-                >Message</label
-              >
-              <input
-                type="text"
+                name="message"
                 class="form-control"
                 id="message"
               />
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
-  
         </div>
       </article>
     </main>
+    <footer class="footer">
+      <div class="footer__wrapper">
+        <p class="footer__content">Bielsko,Biała</p>
+        <p class="footer__content">git</p>
+        <p class="footer__content">email</p>
+      </div>
+    </footer>
   </body>
 </html>

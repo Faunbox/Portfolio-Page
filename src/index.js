@@ -1,7 +1,8 @@
-import "./sass/index.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./sass/index.scss";
 
 import firebase from "firebase";
+import { firebaseConfig } from "../config/firebaseConfig";
 import Ui from "./js/Ui";
 import Menu from "./js/Menu";
 
@@ -27,9 +28,10 @@ class App extends Ui {
   }
 
   init() {
+    firebase.initializeApp(firebaseConfig);
     this.handleElements();
     this.addEventListeners();
-    this.menu.init()
+    this.menu.init();
   }
 }
 

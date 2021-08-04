@@ -1,0 +1,21 @@
+.footer {
+  display: flex;
+  transition: 0.5s ease-out;
+
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  background-color: $aside-menu-phone-bgc;
+
+  @media (min-width: 1024px) {
+    margin-left: $aside-menu-width-big-screen;
+  }
+
+  .footer__wrapper {
+    display: flex;
+  }
+
+  .footer__content {
+    margin: 0 10px;
+  }
+}

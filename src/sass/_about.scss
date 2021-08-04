@@ -1,6 +1,7 @@
 .about {
   font-size: 1.2rem;
   line-height: 2rem;
+  margin-bottom: clamp(2rem, 2.5rem, 3rem);
 
   .about__header {
     margin: 3rem 0;

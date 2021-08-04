@@ -1,0 +1,17 @@
+.projects {
+  margin-bottom: $margin-bottom-section;
+  .projects__header {
+    margin: $margin-headers;
+  }
+
+  .projects__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    .card {
+      margin: 1rem;
+    }
+  }
+}
