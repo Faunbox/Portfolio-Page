@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./sass/index.scss";
 
-import firebase from "firebase";
+import firebase from "firebase/app";
 import { firebaseConfig } from "../config/firebaseConfig";
 import Ui from "./js/Ui";
 import Menu from "./js/Menu";
@@ -20,10 +20,17 @@ class App extends Ui {
 
   addEventListeners() {
     this.#hamburger.addEventListener("click", () => {
+      const exitMenuDiv = document.createElement("div");
+      exitMenuDiv.className = "menu__exit-menu";
+
+      exitMenuDiv.addEventListener("click", () =>
+        this.nav.classList.remove("menu__active")
+      );
       this.nav.classList.toggle("menu__active");
     });
     document.body.onresize = () => {
-      this.menu.getHeight();
+      this.menu.getActualScrollHeight();
+      this.menu.getActualOffsetOfMenuElements();
     };
   }
 
@@ -31,7 +38,7 @@ class App extends Ui {
     firebase.initializeApp(firebaseConfig);
     this.handleElements();
     this.addEventListeners();
-    this.menu.init();
+    this.menu.getActualOffsetOfMenuElements();
   }
 }
 

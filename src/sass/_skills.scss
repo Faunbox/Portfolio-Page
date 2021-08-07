@@ -1,6 +1,25 @@
 .skills {
-    margin-bottom: $margin-bottom-section;
-    .skills__header {
-        margin: $margin-headers;
+  margin-bottom: $margin-bottom-section;
+  .skills__header {
+    margin: $margin-headers;
+  }
+  .skills__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    .skills__element {
+      margin: 1.5rem;
+      .skills__image {
+        width: 100px;
+        height: 100px;
+
+        @media (min-width: 763px) {
+          width: 130px;
+          height: 130px;
+        }
+      }
     }
+  }
 }

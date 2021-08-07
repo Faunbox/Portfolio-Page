@@ -10,7 +10,7 @@ module.exports = {
     main: './src/index.js',
   },
   output: {
-    filename: 'js/[name]-[contenthash].js',
+    filename: '[name]-[contenthash].js',
     path: path.resolve(__dirname, '../', 'build')
   },
   module: {
@@ -66,7 +66,7 @@ module.exports = {
       title: "nowa aplikacja"
     }),
     new MiniCssExtractPlugin({
-      filename: '[name]-[contenthash].css'
+      filename: '[name]-[contenthash:4].css'
     }),
     new CopyPlugin(
       [

@@ -1,22 +1,28 @@
 import Ui from "./Ui";
 
 export default class Menu extends Ui {
-  menu = this.getElement(this.UiSelectors.nav);
-  offsetHeight = this.menu.offsetHeight;
-  scrollHeight = this.window.pageYOffset / 2;
-
-  getHeight() {
-    this.offsetHeight = this.menu.offsetHeight;
-  }
+  menuElements = [...this.getElements(this.UiSelectors.menuElements)];
+  mainElement = [...this.getElement(this.UiSelectors.main).children];
+  offsetHeight = null;
+  scrollHeight = null;
+  actualOffsetTopValues = [];
 
   getActualScrollHeight() {
     document.body.onscroll = () => {
-      console.log(this.scrollHeight);
+      if (window.pageYOffset >= window.innerHeight / 2) {
+        return (this.scrollHeight = window.pageYOffset / 2);
+      }
     };
   }
 
-  init() {
-    this.getActualScrollHeight();
-    this.getHeight();
+  getActualOffsetOfMenuElements() {
+    this.actualOffsetTopValues = []
+    this.mainElement.forEach((element) => {
+      const elemntHeight = element.offsetTop;
+      this.actualOffsetTopValues.push(elemntHeight);
+    });
+    this.actualOffsetTopValues.shift();
   }
+
+  addClassToActiveElement = () => {};
 }

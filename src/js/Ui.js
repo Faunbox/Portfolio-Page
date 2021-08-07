@@ -1,6 +1,8 @@
 export default class Ui {
   UiSelectors = {
     nav: ".menu",
+    menuElements: ".menu__list-element",
+    main: ".app",
     hamburger: ".menu__hamburger",
     skills: ".skills",
     about: ".about",

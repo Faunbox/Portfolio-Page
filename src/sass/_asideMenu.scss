@@ -60,7 +60,8 @@
       margin: 2rem;
 
       :hover {
-        color: #444;
+        color: #223;
+        border-bottom: 1px solid #223;
       }
 
       a {
@@ -80,4 +81,8 @@
   top: 0;
   left: 0;
   transform: translateX(0);
+}
+
+.-active {
+  color: #222;
 }
