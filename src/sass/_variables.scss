@@ -5,15 +5,30 @@ $aside-menu-width-phone-screen: 90vw;
 $aside-menu-bgc: #eee;
 $aside-menu-phone-bgc: rgba(230, 230, 230, 0.6);
 
+$aside-menu-bgc-dark: #111;
+$aside-menu-phone-bgc-dark: rgba(60, 60, 60, 0.6);
+
+$bgc-linear-gradient: linear-gradient(
+  -45deg,
+  #ebc8a0,
+  #f3eef0,
+  #c0cdd1,
+  #545355
+);
+$bgc-linear-gradient-dark: linear-gradient(
+  45deg,
+  #1b1b1b,
+  #494849,
+  #474949,
+  #19191a
+);
+
 $font-size: 10px;
 $font-color: #111;
+
+$font-color-dark: #ccc;
 
 $padding-phone: 10%;
 
 $margin-headers: 3rem 0;
 $margin-bottom-section: clamp(2rem, 2.5rem, 3rem);
-
-
-
-
-

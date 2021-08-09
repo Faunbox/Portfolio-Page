@@ -5,6 +5,7 @@ import firebase from "firebase/app";
 import { firebaseConfig } from "../config/firebaseConfig";
 import Ui from "./js/Ui";
 import Menu from "./js/Menu";
+import Theme from "./js/Theme";
 
 class App extends Ui {
   #hamburger = null;
@@ -12,6 +13,7 @@ class App extends Ui {
   about = null;
 
   menu = new Menu();
+  theme = new Theme();
 
   handleElements() {
     this.#hamburger = this.getElement(this.UiSelectors.hamburger);
@@ -20,25 +22,20 @@ class App extends Ui {
 
   addEventListeners() {
     this.#hamburger.addEventListener("click", () => {
-      const exitMenuDiv = document.createElement("div");
-      exitMenuDiv.className = "menu__exit-menu";
-
       exitMenuDiv.addEventListener("click", () =>
         this.nav.classList.remove("menu__active")
       );
       this.nav.classList.toggle("menu__active");
     });
-    document.body.onresize = () => {
-      this.menu.getActualScrollHeight();
-      this.menu.getActualOffsetOfMenuElements();
-    };
+    this.theme.init();
   }
 
   init() {
     firebase.initializeApp(firebaseConfig);
     this.handleElements();
     this.addEventListeners();
-    this.menu.getActualOffsetOfMenuElements();
+    // this.menu.getActualOffsetOfMenuElements();
+    this.menu.init();
   }
 }
 

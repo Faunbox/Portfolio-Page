@@ -1,11 +1,14 @@
 export default class Ui {
   UiSelectors = {
     nav: ".menu",
-    menuElements: ".menu__list-element",
+    menuElements: ".menu__list-element-link",
     main: ".app",
     hamburger: ".menu__hamburger",
     skills: ".skills",
     about: ".about",
+    background: ".background",
+    footer: ".footer",
+    themeSwitcher: ".form-check",
   };
 
   getElement(element) {

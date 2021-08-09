@@ -19,7 +19,12 @@ body {
   overflow-x: hidden;
   font-size: 1.2rem;
   line-height: 2rem;
+  color: $font-color;
+  .--dark {
+    color: $font-color-dark;
+  }
 }
+
 .background {
   position: fixed;
   top: 0;
@@ -28,7 +33,7 @@ body {
   width: 200vw;
   height: 200vh;
 
-  background: linear-gradient(-45deg, #ebc8a0, #f3eef0, #c0cdd1, #545355);
+  background: $bgc-linear-gradient;
   background-size: 200% 200%;
   animation: gradient 5s ease infinite;
 }
@@ -45,11 +50,22 @@ body {
   }
 }
 
+.background.--dark {
+  background: $bgc-linear-gradient-dark;
+  background-size: 200% 200%;
+  animation: gradient 5s ease infinite;
+}
+
 main {
   padding: 0 $padding-phone;
   transition: 0.5s ease-out;
+  color: $font-color;
 
   @media (min-width: 1024px) {
     margin-left: $aside-menu-width-big-screen;
+  }
+
+  .--dark {
+    color: $font-color-dark;
   }
 }
