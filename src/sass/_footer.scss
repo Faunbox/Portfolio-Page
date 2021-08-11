@@ -1,18 +1,17 @@
 .footer {
   display: flex;
   transition: 0.5s ease-out;
-
+  width: 100%;
   align-items: center;
   justify-content: center;
   height: 3rem;
   background-color: $aside-menu-phone-bgc;
 
-  @media (min-width: 1024px) {
-    margin-left: $aside-menu-width-big-screen;
-  }
-
   .footer__wrapper {
     display: flex;
+    @media (min-width: 1024px) {
+      margin-left: $aside-menu-width-big-screen;
+    }
   }
 
   .footer__content {
@@ -20,6 +19,6 @@
   }
 }
 
-.--dark {
+.footer.--dark {
   background-color: $aside-menu-phone-bgc-dark;
 }

@@ -6,9 +6,12 @@ export default class Ui {
     hamburger: ".menu__hamburger",
     skills: ".skills",
     about: ".about",
+    projects: ".projects",
     background: ".background",
     footer: ".footer",
     themeSwitcher: ".form-check",
+    card: ".card",
+    template: "#projects__template"
   };
 
   getElement(element) {

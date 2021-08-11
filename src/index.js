@@ -1,11 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./sass/index.scss";
-
-import firebase from "firebase/app";
-import { firebaseConfig } from "../config/firebaseConfig";
+import 'bootstrap/js/dist/collapse'
 import Ui from "./js/Ui";
 import Menu from "./js/Menu";
 import Theme from "./js/Theme";
+import Card from "./js/Card";
 
 class App extends Ui {
   #hamburger = null;
@@ -14,28 +13,30 @@ class App extends Ui {
 
   menu = new Menu();
   theme = new Theme();
+  card = new Card();
 
   handleElements() {
     this.#hamburger = this.getElement(this.UiSelectors.hamburger);
     this.nav = this.getElement(this.UiSelectors.nav);
   }
 
+  removeMenuActiveClass() {
+    this.nav.classList.remove("menu__active");
+  }
+
   addEventListeners() {
     this.#hamburger.addEventListener("click", () => {
-      exitMenuDiv.addEventListener("click", () =>
-        this.nav.classList.remove("menu__active")
-      );
       this.nav.classList.toggle("menu__active");
     });
     this.theme.init();
   }
 
+
   init() {
-    firebase.initializeApp(firebaseConfig);
     this.handleElements();
     this.addEventListeners();
-    // this.menu.getActualOffsetOfMenuElements();
     this.menu.init();
+    this.card.init();
   }
 }
 

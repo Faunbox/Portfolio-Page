@@ -9,10 +9,6 @@
     width: 20px;
     height: 20px;
 
-    .--dark {
-      color: $font-color-dark;
-    }
-
     @media (min-width: 375px) {
       width: 30px;
       height: 30px;
@@ -22,6 +18,10 @@
   @media (min-width: 1024px) {
     display: none;
   }
+}
+
+.menu__hamburger.--dark {
+  background-color: transparent;
 }
 
 .menu {

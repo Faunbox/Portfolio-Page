@@ -7,6 +7,7 @@ export default class Theme extends Ui {
   hamburger = this.getElement(this.UiSelectors.hamburger);
   themeSwitcher = this.getElement(this.UiSelectors.themeSwitcher);
   main = this.getElement(this.UiSelectors.main);
+  cards = this.getElements(this.UiSelectors.card);
 
   className = "--dark";
 
@@ -16,11 +17,13 @@ export default class Theme extends Ui {
     this.nav.classList.toggle(this.className);
     this.hamburger.classList.toggle(this.className);
     this.main.classList.toggle(this.className);
+    this.cards.forEach((card) => card.classList.toggle(this.className));
   }
 
   init() {
-    this.themeSwitcher.addEventListener("click", () =>
-      this.handleSwitchTheme()
-    );
+    this.themeSwitcher.addEventListener("click", () => {
+      this.handleSwitchTheme();
+      this.nav.classList.remove("menu__active");
+    });
   }
 }

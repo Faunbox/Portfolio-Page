@@ -1,12 +1,12 @@
 $aside-menu-width-big-screen: 230px;
 $aside-menu-width-tablet-screen: 18rem;
-$aside-menu-width-phone-screen: 90vw;
+$aside-menu-width-phone-screen: 65vw;
 
 $aside-menu-bgc: #eee;
 $aside-menu-phone-bgc: rgba(230, 230, 230, 0.6);
 
 $aside-menu-bgc-dark: #111;
-$aside-menu-phone-bgc-dark: rgba(60, 60, 60, 0.6);
+$aside-menu-phone-bgc-dark: rgba(80, 80, 80, 0.6);
 
 $bgc-linear-gradient: linear-gradient(
   -45deg,
@@ -19,8 +19,8 @@ $bgc-linear-gradient-dark: linear-gradient(
   45deg,
   #1b1b1b,
   #494849,
-  #474949,
-  #19191a
+  #acbdbd,
+  #332538
 );
 
 $font-size: 10px;

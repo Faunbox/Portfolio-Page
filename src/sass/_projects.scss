@@ -13,5 +13,9 @@
     .card {
       margin: 1rem;
     }
+
+    .card.--dark {
+      background-color: #555;
+    }
   }
 }
