@@ -6,30 +6,38 @@ export default class Card extends Ui {
 
   db = db;
   collection = "fl_content";
-  data = [];
   docRef = this.db.collection(this.collection).get();
 
-  getData() {
+  getData = () => {
     this.docRef
-      .then((snapshot) => snapshot.forEach((doc) => this.data.push(doc.data())))
-      .then(console.log(this.data))
+      .then((snapshot) =>
+        snapshot.forEach((doc) => this.appendDataToTemplate(doc.data()))
+      )
       .catch((error) => console.error("Whoops!" + error));
-  }
+  };
 
-  appendDataToTemplate() {
-    const project = this.getElement(this.UiSelectors.projects);
+  appendDataToTemplate = (data) => {
+
+    const {tytulProjektu, opisProjektu, linkDoAplikacji, linkDoProjektuNaGithubie} = data
+
+    const projectSection = this.getElement(this.UiSelectors.projects);
     const clone = this.template.content.cloneNode(true);
-    const accordionButton = clone.querySelector(".accordion-button")
-    const accordionBody = clone.querySelector(".accordion-body")
-    const accordionGit = clone.querySelector("#git")
-    const accordionDemo = clone.querySelector("#demo")
-    
-    
-    console.log(accordionBody, accordionButton, accordionDemo, accordionGit);
-  }
+    const accordionHeader = clone.querySelector(".accordion-body");
+    const accordionBody = clone.querySelector(".accordion-body");
+    const accordionButton = clone.querySelector(".accordion-button");
+    const accordionGit = clone.querySelector("#git");
+    const accordionDemo = clone.querySelector("#demo");
+
+    accordionButton.innerText = tytulProjektu;
+    accordionHeader.innerText = tytulProjektu;
+    accordionBody.innerText = opisProjektu;
+    accordionGit.setAttribute("href", linkDoProjektuNaGithubie);
+    accordionDemo.setAttribute("href", linkDoAplikacji);
+
+    projectSection.appendChild(clone);
+  };
 
   init() {
     this.getData();
-    this.appendDataToTemplate();
   }
 }
