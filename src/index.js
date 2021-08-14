@@ -8,35 +8,32 @@ import Card from "./js/Card";
 
 class App extends Ui {
   #hamburger = null;
-  nav = null;
-  about = null;
+  #nav = null;
 
-  menu = new Menu();
-  theme = new Theme();
-  card = new Card();
+  #menu = new Menu();
+  #theme = new Theme();
+  #card = new Card();
 
-  handleElements() {
+  #handleElements() {
     this.#hamburger = this.getElement(this.UiSelectors.hamburger);
-    this.nav = this.getElement(this.UiSelectors.nav);
+    this.#nav = this.getElement(this.UiSelectors.nav);
   }
 
-  removeMenuActiveClass() {
-    this.nav.classList.remove("menu__active");
+  #toggleMenuActiveClass() {
+    this.#nav.classList.toggle("menu__active");
   }
 
-  addEventListeners() {
-    this.#hamburger.addEventListener("click", () => {
-      this.nav.classList.toggle("menu__active");
-    });
-    this.theme.init();
+  #addEventListeners() {
+    this.#hamburger.addEventListener("click", () => this.#toggleMenuActiveClass());
+    this.#theme.init();
   }
 
 
   init() {
-    this.handleElements();
-    this.addEventListeners();
-    this.menu.init();
-    this.card.init();
+    this.#handleElements();
+    this.#card.getData();
+    this.#addEventListeners();
+    this.#menu.handleMenuElement();
   }
 }
 

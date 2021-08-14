@@ -10,11 +10,16 @@
     align-items: center;
     justify-content: center;
 
-    .card {
-      margin: 1rem;
+    .accordion-button.--dark {
+      color: inherit;
+      background-color: #666;
+    }
+    .accordion-button.--dark.--collapsed {
+      color: inherit;
+      background-color: #666;
     }
 
-    .card.--dark {
+    .accordion-item.--dark {
       background-color: #555;
     }
   }

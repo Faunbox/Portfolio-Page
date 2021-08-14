@@ -5,7 +5,7 @@ export default class Menu extends Ui {
   mainElement = [...this.getElement(this.UiSelectors.main).children];
   menu = this.getElement(this.UiSelectors.nav);
 
-  handleScrollToElemenet(menuElement, element) {
+  #handleScrollToElemenet(menuElement, element) {
     menuElement.addEventListener("click", (e) => {
       e.preventDefault();
       element.scrollIntoView({
@@ -19,11 +19,7 @@ export default class Menu extends Ui {
   handleMenuElement() {
     this.mainElement.shift();
     for (let i = 0; i <= this.mainElement.length - 1; i++) {
-      this.handleScrollToElemenet(this.menuElements[i], this.mainElement[i]);
+      this.#handleScrollToElemenet(this.menuElements[i], this.mainElement[i]);
     }
-  }
-
-  init() {
-    this.handleMenuElement();
   }
 }

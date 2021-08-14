@@ -10,7 +10,8 @@ export default class Ui {
     background: ".background",
     footer: ".footer",
     themeSwitcher: ".form-check",
-    card: ".card",
+    accordeon: ".accordion-item",
+    accordionButtons: ".accordion-button",
     template: "#projects__template"
   };
 
