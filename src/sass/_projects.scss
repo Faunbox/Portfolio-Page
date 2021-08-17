@@ -1,5 +1,6 @@
 .projects {
   margin-bottom: $margin-bottom-section;
+
   .projects__header {
     margin: $margin-headers;
   }
@@ -11,16 +12,17 @@
     justify-content: center;
 
     .accordion-button.--dark {
-      color: inherit;
-      background-color: #666;
+      color: $accordion-button-active-bg;
+      background-color: $accordion-button-active-color;
     }
-    .accordion-button.--dark.--collapsed {
-      color: inherit;
-      background-color: #666;
+
+    .accordion-button {
+      color: red;
+      background-color: khaki;
     }
 
     .accordion-item.--dark {
-      background-color: #555;
+      background-color: #666;
     }
   }
 }

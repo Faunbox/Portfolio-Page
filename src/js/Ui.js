@@ -4,15 +4,19 @@ export default class Ui {
     menuElements: ".menu__list-element-link",
     main: ".app",
     hamburger: ".menu__hamburger",
+    intro: ".intro-page",
     skills: ".skills",
-    about: ".about",
+    skillsImg: ".skills__image",
+    about: ".about__wrapper",
     projects: ".projects",
     background: ".background",
+    contact: '.contact',
     footer: ".footer",
     themeSwitcher: ".form-check",
     accordeon: ".accordion-item",
     accordionButtons: ".accordion-button",
-    template: "#projects__template"
+    template: "#projects__template",
+    bootstrapBtns: "btn",
   };
 
   getElement(element) {

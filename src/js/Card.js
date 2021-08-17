@@ -1,5 +1,6 @@
 import Ui from "./Ui";
 import { db } from "../../config/firebaseConfig";
+import gsap from "gsap";
 
 export default class Card extends Ui {
   #template = this.getElement(this.UiSelectors.template);
@@ -7,16 +8,36 @@ export default class Card extends Ui {
   #db = db;
   #collection = "fl_content";
   #docRef = this.#db.collection(this.#collection).get();
+  #gsapFirstMountFlag = false;
 
   getData = () => {
     this.#docRef
       .then((snapshot) =>
         snapshot.forEach((doc) => this.#appendDataToTemplate(doc.data()))
       )
-      .catch((error) => {return console.error("Whoops!" + error)});
+      .catch((error) => {
+        return console.error("Whoops! There is some error! => " + error);
+      });
   };
 
-  handleOnClick = () => {};
+  #animateOnScroll(element) {
+    gsap.fromTo(
+      element,
+      { opacity: 0, x: -50 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1,
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: element,
+          start: "bottom-=20% center+=20%",
+          end: "bottom-=20% center+=20%",
+          toggleActions: "play none reverse none",
+        },
+      }
+    );
+  }
 
   #appendDataToTemplate = (data) => {
     const {
@@ -24,7 +45,7 @@ export default class Card extends Ui {
       opisProjektu,
       linkDoAplikacji,
       linkDoProjektuNaGithubie,
-      id
+      id,
     } = data;
 
     const projectSection = this.getElement(this.UiSelectors.projects);
@@ -36,6 +57,10 @@ export default class Card extends Ui {
     const accordionGit = clone.querySelector("#git");
     const accordionDemo = clone.querySelector("#demo");
 
+    if (!this.#gsapFirstMountFlag) {
+      this.#animateOnScroll(projectSection);
+    }
+
     accordionButton.innerText = tytulProjektu;
     accordionButton.setAttribute("data-bs-target", `#${id}`);
     accordionDiv.setAttribute("id", `${id}`);
@@ -45,5 +70,6 @@ export default class Card extends Ui {
     accordionDemo.setAttribute("href", linkDoAplikacji);
 
     projectSection.appendChild(clone);
+    this.#gsapFirstMountFlag = true;
   };
 }
