@@ -10,23 +10,31 @@ export default class ScrollAnimations extends Ui {
   aboutSection = [...this.getElement(this.UiSelectors.about).children];
   contactPage = [...this.getElement(this.UiSelectors.contact).children];
   skills = [...this.getElement(this.UiSelectors.skills).children];
-
   allElementsToScrollTrigger = [
     this.aboutSection,
     this.contactPage,
     this.skills[0],
   ];
-  allElementsToAnimateOnFirstPageLoad = [this.introPage, this.menu];
 
-  animationPageOnPageLoad(element) {
-    gsap.set(element, { opacity: 0, scale: 0 });
-    gsap.to(element, {
-      opacity: 1,
-      scale: 1.0,
-      duration: 1.5,
-      delay: 1,
-      stagger: 0.5,
-    });
+  animationPageOnPageLoad() {
+    gsap.fromTo(
+      this.introPage,
+      { opacity: 0, scale: 0, y: -50 },
+      {
+        opacity: 1,
+        scale: 1.0,
+        y: 0,
+        duration: 1.5,
+        delay: 1,
+        stagger: 0.5,
+      }
+    );
+  }
+
+  menuAnimationOnPageLoad() {
+    if (window.innerWidth >= 1024) {
+      gsap.fromTo(this.menu, { scale: 0 }, { scale: 1.0, opacity: 1 });
+    }
   }
 
   showTextOnScrolling(element) {
@@ -52,13 +60,11 @@ export default class ScrollAnimations extends Ui {
     this.allElementsToScrollTrigger.forEach((element) =>
       this.showTextOnScrolling(element)
     );
-    this.allElementsToAnimateOnFirstPageLoad.forEach((element) =>
-      this.animationPageOnPageLoad(element)
-    );
   }
 
   init() {
     this.animationPageOnPageLoad();
+    this.menuAnimationOnPageLoad();
     this.useAnimationOnBodyElements();
   }
 }
