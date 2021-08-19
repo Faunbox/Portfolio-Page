@@ -7,22 +7,29 @@ export default class Theme extends Ui {
   hamburger = this.getElement(this.UiSelectors.hamburger);
   themeSwitcher = this.getElement(this.UiSelectors.themeSwitcher);
   main = this.getElement(this.UiSelectors.main);
-  buttons = this.getElements(this.UiSelectors.bootstrapBtns)
+  bootstrapButton = this.getElement(this.UiSelectors.bootstrapBtn);
 
   #className = "--dark";
 
   handleSwitchTheme() {
     const accordeonsItems = this.getElements(this.UiSelectors.accordeon);
-    const accordeonsButtons = this.getElements(this.UiSelectors.accordionButtons);
+    const accordeonsButtons = this.getElements(
+      this.UiSelectors.accordionButtons
+    );
 
     this.background.classList.toggle(this.#className);
     this.footer.classList.toggle(this.#className);
     this.nav.classList.toggle(this.#className);
     this.hamburger.classList.toggle(this.#className);
     this.main.classList.toggle(this.#className);
+    this.bootstrapButton.classList.toggle("btn-secondary");
 
-    accordeonsItems.forEach((element) => element.classList.toggle(this.#className));
-    accordeonsButtons.forEach((element) => element.classList.toggle(this.#className));
+    accordeonsItems.forEach((element) =>
+      element.classList.toggle(this.#className)
+    );
+    accordeonsButtons.forEach((element) =>
+      element.classList.toggle(this.#className)
+    );
   }
 
   init() {

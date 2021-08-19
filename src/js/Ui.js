@@ -16,7 +16,7 @@ export default class Ui {
     accordeon: ".accordion-item",
     accordionButtons: ".accordion-button",
     template: "#projects__template",
-    bootstrapBtns: "btn",
+    bootstrapBtn: ".btn",
   };
 
   getElement(element) {
