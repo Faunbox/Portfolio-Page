@@ -50,6 +50,7 @@
 
   @media (min-width: 1024px) {
     width: $aside-menu-width-big-screen;
+    transform: translateX(0);
     border-bottom-right-radius: 0;
     height: 100%;
   }
@@ -79,9 +80,6 @@
     align-items: center;
     justify-self: end;
   }
-}
-.menu__active {
-  transform: translateX(0) !important;
 }
 
 .--dark {
