@@ -13,8 +13,8 @@ export default class Ui {
     contact: '.contact',
     footer: ".footer",
     themeSwitcher: ".form-check",
-    accordeon: ".accordion-item",
     accordionButtons: ".accordion-button",
+    accordionItems: ".accordion-item",
     template: "#projects__template",
     bootstrapBtn: ".btn",
   };

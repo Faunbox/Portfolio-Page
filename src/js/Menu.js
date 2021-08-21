@@ -37,7 +37,6 @@ export default class Menu extends Ui {
     this.hamburger.addEventListener("click", () => this.#toggleMenuActive());
     window.addEventListener("resize", () => {
       if (window.innerWidth >= 1024) {
-        console.log("instrukcja warunkowa");
         gsap
           .set(this.menu, { x: 0, opacity: 1 })
           .then(gsap.set(this.menuElements, { scale: 1, opacity: 1 }));

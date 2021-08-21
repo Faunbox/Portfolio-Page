@@ -17,10 +17,10 @@ class App {
   init() {
     this.#card.getData();
     this.#menu.addEventListeners();
-    this.#theme.init();
     this.#menu.handleMenuElement();
     this.#Animation.init();
     this.#skills.init();
+    this.#theme.init();
   }
 }
 
