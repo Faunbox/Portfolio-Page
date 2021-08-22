@@ -4,21 +4,62 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  height: 3rem;
-  background-color: $aside-menu-phone-bgc;
+  height: auto;
+  padding: 10px 0;
 
   .footer__wrapper {
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    @media (min-width: 600px) {
+      flex-direction: row;
+    }
     @media (min-width: 1024px) {
       margin-left: $aside-menu-width-big-screen;
     }
-  }
 
-  .footer__content {
-    margin: 0 10px;
-  }
-}
+    .footer__content {
+      display: flex;
+      justify-content: center;
+      color: inherit;
+      text-decoration: none;
+      align-items: center;
+      margin: 0 10px;
+      text-align: center;
+      content: "";
+    }
+    .--location::before {
+      display: inline-block;
+      width: 19px;
+      height: 19px;
+      margin-right: 5px;
+      content: "";
+      background-image: url("../../public/images/geo-alt.svg");
+      background-repeat: no-repeat;
+    }
+    .--git {
+      &::before {
+        display: inline-block;
+        width: 19px;
+        height: 19px;
+        margin-right: 5px;
+        content: "";
+        background-image: url("../../public/images/github.svg");
+        background-repeat: no-repeat;
+      }
+    }
+    .--mail {
+      &::before {
+        display: inline-block;
+        width: 19px;
+        height: 19px;
+        margin-right: 5px;
 
-.footer.--dark {
-  background-color: $aside-menu-phone-bgc-dark;
+        content: "";
+        background-image: url("../../public/images/envelope.svg");
+        background-repeat: no-repeat;
+      }
+    }
+  }
 }

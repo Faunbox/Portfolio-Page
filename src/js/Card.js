@@ -57,6 +57,7 @@ export default class Card extends Ui {
     const accordionGit = clone.querySelector("#git");
     const accordionDemo = clone.querySelector("#demo");
 
+    //prevent adding animation to all template element
     if (!this.#gsapFirstMountFlag) {
       this.#animateOnScroll(projectSection);
     }

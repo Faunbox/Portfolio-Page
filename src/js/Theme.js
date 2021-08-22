@@ -17,7 +17,6 @@ export default class Theme extends Ui {
     const accordionItems = this.getElements(this.UiSelectors.accordionItems);
     const bootstrapButton = this.getElements(this.UiSelectors.bootstrapBtn);
     const accordionElements = [...accordeonsButtons, ...accordionItems];
-    console.log(accordionElements);
 
     this.background.classList.toggle(this.#className);
     this.footer.classList.toggle(this.#className);
@@ -36,7 +35,7 @@ export default class Theme extends Ui {
   init() {
     this.themeSwitcher.addEventListener("click", () => {
       this.handleSwitchTheme();
-      this.nav.classList.remove("menu__active");
+      
     });
   }
 }

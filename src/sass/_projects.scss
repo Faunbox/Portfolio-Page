@@ -20,6 +20,15 @@
       background-color: $aside-menu-phone-bgc;
       backdrop-filter: blur(5px);
     }
+
+    .accordion-button.collapsed::after {
+      background-image: url(../../public/images/chevron-double-down.svg);
+      transform: rotate(0deg);
+    }
+    .accordion-button:not(.collapsed)::after {
+      background-image: url(../../public/images/chevron-double-down.svg);
+      transform: rotate(180deg);
+    }
   }
 
   //dark theme
@@ -33,7 +42,6 @@
       background-color: $accordion-button-bg-dark;
     }
     .accordion-button.--dark:not(.collapsed) {
-      // color: inherit;
       background-color: rgba(85, 85, 85, 0.288);
       backdrop-filter: blur(5px);
     }

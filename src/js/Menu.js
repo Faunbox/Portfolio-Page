@@ -9,6 +9,7 @@ export default class Menu extends Ui {
   mainElement = [...this.getElement(this.UiSelectors.main).children];
   menu = this.getElement(this.UiSelectors.nav);
   hamburger = this.getElement(this.UiSelectors.hamburger);
+  menuSwitcher = this.getElement(this.UiSelectors.switchOffMenu);
   isMenuActive = false;
 
   #toggleMenuActive() {
@@ -18,23 +19,30 @@ export default class Menu extends Ui {
       .fromTo(
         this.menu,
         { x: -menuWidth, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.6 }
+        { x: 0, opacity: 1, duration: 0.5 }
       )
       .fromTo(
         this.menuElements,
         { scale: 0, opacity: 0 },
         { scale: 1, opacity: 1, duration: 0.4, stagger: 0.1 }
       );
+
     if (this.isMenuActive && window.innerWidth < 1024) {
       this.isMenuActive = false;
+      this.menuSwitcher.style.display = "none";
+
       return animation.reverse(0);
     }
     this.isMenuActive = true;
+    this.menuSwitcher.style.display = "block";
     return animation.play();
   }
 
   addEventListeners() {
     this.hamburger.addEventListener("click", () => this.#toggleMenuActive());
+    this.menuSwitcher.addEventListener("click", () => this.#toggleMenuActive());
+
+    //responsive menu display after open on mobile and resize to big screen
     window.addEventListener("resize", () => {
       if (window.innerWidth >= 1024) {
         gsap

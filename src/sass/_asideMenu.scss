@@ -58,6 +58,7 @@
   ul {
     list-style: none;
     padding: 0;
+    z-index: 4;
 
     li {
       margin: 2rem;
@@ -74,6 +75,22 @@
       }
     }
   }
+  .menu__exit {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+    z-index: 2;
+
+    @media (min-width: 1024px) {
+      display: none;
+    }
+  }
+  .form-check {
+    z-index: 4;
+  }
   .form-check-input:checked {
     background-color: rgba(145, 145, 145, 0.37);
     border-color: white;
@@ -84,7 +101,7 @@
   }
 }
 
-.--dark {
+.menu.--dark {
   background-color: $aside-menu-phone-bgc-dark;
   color: $font-color-dark;
 }
