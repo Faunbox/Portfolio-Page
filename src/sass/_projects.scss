@@ -6,44 +6,21 @@
   }
 
   //light theme
-  .accordion-item {
+  .card,
+  // .card-header,
+  .card-element {
     background-color: $aside-menu-phone-bgc;
+    transition: 0.5s ease;
     backdrop-filter: blur(5px);
-
-    .accordion-button {
-      background-color: rgba(210, 210, 210, 0.288);
-      backdrop-filter: blur(5px);
-    }
-
-    .accordion-button:not(.collapsed) {
-      color: inherit;
-      background-color: $aside-menu-phone-bgc;
-      backdrop-filter: blur(5px);
-    }
-
-    .accordion-button.collapsed::after {
-      background-image: url(../../public/images/chevron-double-down.svg);
-      transform: rotate(0deg);
-    }
-    .accordion-button:not(.collapsed)::after {
-      background-image: url(../../public/images/chevron-double-down.svg);
-      transform: rotate(180deg);
-    }
   }
-
   //dark theme
 
-  .accordion-item.--dark {
+  .card.--dark,
+  .card-element.--dark {
     background-color: rgba(102, 102, 102, 0.158);
+  }
+  .card-header.--dark {
+    background-color: rgba(85, 85, 85, 0.288);
     backdrop-filter: blur(5px);
-
-    .accordion-button.--dark {
-      color: $accordion-button-active-color;
-      background-color: $accordion-button-bg-dark;
-    }
-    .accordion-button.--dark:not(.collapsed) {
-      background-color: rgba(85, 85, 85, 0.288);
-      backdrop-filter: blur(5px);
-    }
   }
 }

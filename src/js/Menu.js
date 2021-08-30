@@ -12,6 +12,12 @@ export default class Menu extends Ui {
   menuSwitcher = this.getElement(this.UiSelectors.switchOffMenu);
   isMenuActive = false;
 
+  menuAnimationOnPageLoad() {
+    if (window.innerWidth >= 1024) {
+      gsap.fromTo(this.menu, { scale: 0 }, { scale: 1.0, opacity: 1 });
+    }
+  }
+
   #toggleMenuActive() {
     const menuWidth = this.menu.offsetWidth;
     const tl = gsap.timeline();
@@ -59,6 +65,9 @@ export default class Menu extends Ui {
         behavior: "smooth",
         block: "start",
       });
+      if (window.innerWidth <= 1024) {
+        this.#toggleMenuActive();
+      }
     });
   }
 

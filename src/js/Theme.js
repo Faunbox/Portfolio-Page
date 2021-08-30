@@ -11,31 +11,31 @@ export default class Theme extends Ui {
   #className = "--dark";
 
   handleSwitchTheme() {
-    const accordeonsButtons = this.getElements(
-      this.UiSelectors.accordionButtons
-    );
-    const accordionItems = this.getElements(this.UiSelectors.accordionItems);
     const bootstrapButton = this.getElements(this.UiSelectors.bootstrapBtn);
-    const accordionElements = [...accordeonsButtons, ...accordionItems];
+    const cards = this.getElements(this.UiSelectors.card);
+    const projectsElement = [...cards];
 
     this.background.classList.toggle(this.#className);
     this.footer.classList.toggle(this.#className);
     this.nav.classList.toggle(this.#className);
     this.hamburger.classList.toggle(this.#className);
     this.main.classList.toggle(this.#className);
-    bootstrapButton.forEach((element) =>
-      element.classList.toggle("btn-secondary")
-    );
+    bootstrapButton.forEach((element) => {
+      element.classList.toggle("btn-light");
+      element.classList.toggle("btn-secondary");
+    });
 
-    accordionElements.forEach((element) =>
-      element.classList.toggle(this.#className)
-    );
+    projectsElement.forEach((element) => {
+      element.classList.toggle(this.#className);
+      [...element.children].forEach((elem) =>
+        elem.classList.toggle(this.#className)
+      );
+    });
   }
 
   init() {
     this.themeSwitcher.addEventListener("click", () => {
       this.handleSwitchTheme();
-      
     });
   }
 }

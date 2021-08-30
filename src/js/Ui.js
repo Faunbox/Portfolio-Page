@@ -16,8 +16,7 @@ export default class Ui {
     skillsImg: ".skills__image",
     //projects
     projects: ".projects",
-    accordionButtons: ".accordion-button",
-    accordionItems: ".accordion-item",
+    card: ".card",
     template: "#projects__template",
     //contact and footer
     contact: ".contact",

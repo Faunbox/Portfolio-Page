@@ -1,4 +1,5 @@
 import Ui from "./Ui";
+import Animate from "./ScrollAnimations";
 import { db } from "../../config/firebaseConfig";
 import gsap from "gsap";
 
@@ -9,35 +10,21 @@ export default class Card extends Ui {
   #collection = "fl_content";
   #docRef = this.#db.collection(this.#collection).get();
   #gsapFirstMountFlag = false;
+  #animate = new Animate();
 
-  getData = () => {
-    this.#docRef
-      .then((snapshot) =>
-        snapshot.forEach((doc) => this.#appendDataToTemplate(doc.data()))
-      )
+  getData = async () => {
+    await this.#docRef
+      .then((snapshot) => {
+        snapshot.forEach((doc) => this.#appendDataToTemplate(doc.data()));
+
+        this.#animate.useAnimationOnBodyElements();
+      })
       .catch((error) => {
-        return console.error("Whoops! There is some error! => " + error);
+        return console.error(
+          "Whoops! There is some error while fetching data!! => " + error
+        );
       });
   };
-
-  #animateOnScroll(element) {
-    gsap.fromTo(
-      element,
-      { opacity: 0, x: -50 },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 1,
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: element,
-          start: "bottom-=20% center+=20%",
-          end: "bottom-=20% center+=20%",
-          toggleActions: "play none reverse none",
-        },
-      }
-    );
-  }
 
   #appendDataToTemplate = (data) => {
     const {
@@ -45,30 +32,26 @@ export default class Card extends Ui {
       opisProjektu,
       linkDoAplikacji,
       linkDoProjektuNaGithubie,
-      id,
     } = data;
 
     const projectSection = this.getElement(this.UiSelectors.projects);
     const clone = this.#template.content.cloneNode(true);
-    const accordionDiv = clone.querySelector(".accordion-collapse");
-    const accordionHeader = clone.querySelector(".accordion-body");
-    const accordionBody = clone.querySelector(".accordion-body");
-    const accordionButton = clone.querySelector(".accordion-button");
-    const accordionGit = clone.querySelector("#git");
-    const accordionDemo = clone.querySelector("#demo");
+    const cardHeader = clone.querySelector(".card-header");
+    // const cardImage = clone.querySelector(".card-image");
+    // const cardTitle = clone.querySelector(".card-title");
+    const cardtext = clone.querySelector(".card-text");
+    const cardGitButton = clone.querySelector("#git");
+    const cardDemoButton = clone.querySelector("#demo");
 
     //prevent adding animation to all template element
     if (!this.#gsapFirstMountFlag) {
-      this.#animateOnScroll(projectSection);
+      this.#animate.animateOnScroll(projectSection);
     }
 
-    accordionButton.innerText = tytulProjektu;
-    accordionButton.setAttribute("data-bs-target", `#${id}`);
-    accordionDiv.setAttribute("id", `${id}`);
-    accordionHeader.innerText = tytulProjektu;
-    accordionBody.innerText = opisProjektu;
-    accordionGit.setAttribute("href", linkDoProjektuNaGithubie);
-    accordionDemo.setAttribute("href", linkDoAplikacji);
+    cardHeader.innerText = tytulProjektu;
+    cardtext.innerText = opisProjektu;
+    cardGitButton.setAttribute("href", linkDoProjektuNaGithubie);
+    cardDemoButton.setAttribute("href", linkDoAplikacji);
 
     projectSection.appendChild(clone);
     this.#gsapFirstMountFlag = true;
