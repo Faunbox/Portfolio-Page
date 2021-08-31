@@ -5,14 +5,25 @@ import Ui from "./Ui";
 gsap.registerPlugin(ScrollTrigger);
 
 export default class Skills extends Ui {
+  isActive = false;
   #animateOnClick = (element) => {
-    gsap
-      .to(element, {
-        rotation: 360,
-        duration: 0.5,
-        transformStyle: "preserve-3d",
-      })
-      .then(gsap.to(element, { rotation: 0, duration: 1, delay: 0.5 }));
+    if (!this.isActive) {
+      gsap
+        .to(element, {
+          rotation: 360,
+          duration: 0.5,
+          transformStyle: "preserve-3d",
+          onStart: () => (this.isActive = true),
+        })
+        .then(
+          gsap.to(element, {
+            rotation: 0,
+            duration: 1,
+            delay: 0.5,
+            onComplete: () => (this.isActive = false),
+          })
+        );
+    }
   };
 
   #handleOnClick = () => {
@@ -22,7 +33,6 @@ export default class Skills extends Ui {
   };
 
   init() {
-    // this.#animateOnScrollTrigger();
     this.#handleOnClick();
   }
 }
