@@ -1,6 +1,6 @@
 # New Portfolio webpage build with vanilla JS.
 
-##General info
+## General info
 Decided to leave old version of this website (I was building it with React) and strongly focus on Objected Oriented Programming in JavaScript.
 
 ## Technologies
