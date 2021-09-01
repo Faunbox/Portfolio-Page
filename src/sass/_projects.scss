@@ -7,14 +7,12 @@
 
   //light theme
   .card,
-  // .card-header,
   .card-element {
     background-color: $aside-menu-phone-bgc;
-    transition: 0.5s ease;
     backdrop-filter: blur(5px);
   }
+  
   //dark theme
-
   .card.--dark,
   .card-element.--dark {
     background-color: rgba(102, 102, 102, 0.158);

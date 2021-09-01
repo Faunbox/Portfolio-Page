@@ -17,6 +17,8 @@ export default class Ui {
     //projects
     projects: ".projects",
     card: ".card",
+    projectsWrapper: ".projects__projects",
+    projectHeader: ".projects__header",
     template: "#projects__template",
     //contact and footer
     contact: ".contact",

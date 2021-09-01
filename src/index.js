@@ -14,11 +14,11 @@ class App {
   #skills = new Skills();
 
   init() {
-    this.#animation.init();
     this.#card.getData();
     this.#menu.addEventListeners();
     this.#menu.handleMenuElement();
     this.#skills.init();
+    this.#animation.init();
     this.#theme.init();
   }
 }
