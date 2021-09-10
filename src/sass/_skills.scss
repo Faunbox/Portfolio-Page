@@ -1,5 +1,7 @@
 .skills {
   margin-bottom: $margin-bottom-section;
+  overflow-x: hidden;
+
   .skills__header {
     margin: $margin-headers;
   }

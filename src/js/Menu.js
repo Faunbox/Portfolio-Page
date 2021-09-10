@@ -14,6 +14,7 @@ export default class Menu extends Ui {
 
   menuAnimationOnPageLoad() {
     if (window.innerWidth >= 1024) {
+      console.log(window.innerWidth);
       gsap.fromTo(this.menu, { scale: 0 }, { scale: 1.0, opacity: 1 });
     }
   }

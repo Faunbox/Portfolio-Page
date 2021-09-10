@@ -1,7 +1,6 @@
 import Ui from "./Ui";
 import Animate from "./ScrollAnimations";
 import { db } from "../../config/firebaseConfig";
-import gsap from "gsap";
 
 export default class Card extends Ui {
   #template = this.getElement(this.UiSelectors.template);
@@ -9,7 +8,6 @@ export default class Card extends Ui {
   #db = db;
   #collection = "fl_content";
   #docRef = this.#db.collection(this.#collection).get();
-  #gsapFirstMountFlag = false;
   #animate = new Animate();
 
   getData = async () => {
@@ -34,7 +32,6 @@ export default class Card extends Ui {
       linkDoProjektuNaGithubie,
     } = data;
 
-    const projectSection = this.getElement(this.UiSelectors.projects);
     const projectsWrapper = this.getElement(this.UiSelectors.projectsWrapper);
     const clone = this.#template.content.cloneNode(true);
     const cardHeader = clone.querySelector(".card-header");
@@ -46,8 +43,8 @@ export default class Card extends Ui {
     cardtext.innerText = opisProjektu;
     cardGitButton.setAttribute("href", linkDoProjektuNaGithubie);
     cardDemoButton.setAttribute("href", linkDoAplikacji);
+    
 
     projectsWrapper.appendChild(clone);
-    this.#gsapFirstMountFlag = true;
   };
 }

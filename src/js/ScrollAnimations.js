@@ -5,37 +5,56 @@ import Ui from "./Ui";
 gsap.registerPlugin(ScrollTrigger);
 
 export default class ScrollAnimations extends Ui {
-  #introPage = [...this.getElement(this.UiSelectors.intro).children];
-  #aboutSection = [...this.getElement(this.UiSelectors.about).children];
-  #contactPage = [...this.getElement(this.UiSelectors.contact).children];
+  #menu = this.getElement(this.UiSelectors.nav);
 
-  #skills = [...this.getElement(this.UiSelectors.skills).children];
-  #projectHeader = this.getElement(this.UiSelectors.projectHeader);
-  #allElementsToScrollTrigger = [
-    this.#aboutSection,
-    this.#contactPage,
-    this.#skills[0],
-    this.#projectHeader,
+  #introPage = [...this.getElement(this.UiSelectors.intro).children];
+
+  #aboutSection = this.getElement(this.UiSelectors.about);
+  #aboutSectionChildren = [...this.getElement(this.UiSelectors.about).children];
+
+  #contactPage = this.getElement(this.UiSelectors.contact);
+  #contactPageChildren = [
+    ...this.getElement(this.UiSelectors.contact).children,
   ];
 
-  #projectSection = this.getElement(this.UiSelectors.projects);
+  #skills = this.getElement(this.UiSelectors.skills);
+  #skillsChildren = [...this.getElement(this.UiSelectors.skills).children];
 
-  #skillsSection = this.getElement(this.UiSelectors.skills);
-  #skillsElementsImg = this.getElements(this.UiSelectors.skillsImg);
-  #allMultipleObject = [
+  #projects = this.getElement(this.UiSelectors.projects);
+  #projectsChildren = [...this.getElement(this.UiSelectors.projects).children];
+
+  #allElementsToScrollTrigger = [
     {
-      trigger: this.#skillsSection,
-      elemets: this.#skillsElementsImg,
+      elements: this.#aboutSectionChildren,
+      trigger: this.#aboutSection,
     },
     {
-      trigger: this.#projectSection,
-      elemets: this.getElement(this.UiSelectors.projectsWrapper).children,
+      elements: this.#contactPageChildren,
+      trigger: this.#contactPage,
+    },
+    {
+      elements: this.#skillsChildren,
+      trigger: this.#skills,
+    },
+    {
+      elements: this.#projectsChildren,
+      trigger: this.#projects,
+    },
+  ];
+
+  #skillsSection = this.getElement(this.UiSelectors.skills).children;
+  #skillsElementsImg = this.getElements(this.UiSelectors.skillsImg);
+
+  #allMultipleObject = [
+    {
+      element: this.#skillsElementsImg,
+      trigger: this.#skillsSection,
     },
   ];
 
   #animationPageOnPageLoad() {
     gsap.fromTo(
-      this.#introPage,
+      [this.#introPage,this.#menu],
       { opacity: 0, y: -50 },
       {
         opacity: 1,
@@ -47,9 +66,9 @@ export default class ScrollAnimations extends Ui {
     );
   }
 
-  #showContentOnScroll(element) {
+  #showContentOnScroll(elements, trigger) {
     gsap.fromTo(
-      element,
+      elements,
       { x: 50, opacity: 0 },
       {
         x: 0,
@@ -57,7 +76,7 @@ export default class ScrollAnimations extends Ui {
         duration: 1,
         stagger: 0.1,
         scrollTrigger: {
-          trigger: element,
+          trigger: trigger,
           start: () => `top center+=20%`,
           end: () => `top center+=20%`,
           toggleActions: "play none reverse none",
@@ -66,9 +85,9 @@ export default class ScrollAnimations extends Ui {
     );
   }
 
-  #animateMultipleElemtsWithScrollTrigger = (elements, trigger) => {
+  #animateMultipleElemtsWithScrollTrigger = (element, trigger) => {
     gsap.fromTo(
-      elements,
+      element,
       {
         opacity: 0,
         scale: 0,
@@ -89,14 +108,11 @@ export default class ScrollAnimations extends Ui {
   };
 
   useAnimationOnBodyElements() {
-    this.#allElementsToScrollTrigger.forEach((element) => {
-      this.#showContentOnScroll(element);
-      this.#allMultipleObject.forEach((element) => {
-        this.#animateMultipleElemtsWithScrollTrigger(
-          element.elemets,
-          element.trigger
-        );
-      });
+    this.#allMultipleObject.forEach(({ trigger, element }) => {
+      this.#animateMultipleElemtsWithScrollTrigger(element, trigger);
+    });
+    this.#allElementsToScrollTrigger.forEach(({ elements, trigger }) => {
+      this.#showContentOnScroll(elements, trigger);
     });
   }
 
