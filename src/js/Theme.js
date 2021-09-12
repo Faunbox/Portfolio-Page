@@ -7,6 +7,7 @@ export default class Theme extends Ui {
   hamburger = this.getElement(this.UiSelectors.hamburger);
   themeSwitcher = this.getElement(this.UiSelectors.themeSwitcher);
   main = this.getElement(this.UiSelectors.main);
+  backgroundFlag = false;
 
   #className = "--dark";
 

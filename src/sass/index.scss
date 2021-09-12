@@ -6,6 +6,7 @@
 @import "skills";
 @import "contact";
 @import "footer";
+@import "_background";
 
 * {
   margin: 0;
@@ -36,28 +37,28 @@ body {
   width: 200vw;
   height: 200vh;
 
-  background: $bgc-linear-gradient;
-  background-size: 200% 200%;
-  animation: gradient 10s ease infinite;
+  // background: $bgc-linear-gradient;
+  // background-size: 200% 200%;
+  // animation: gradient 10s ease infinite;
 }
 
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
+// @keyframes gradient {
+//   0% {
+//     background-position: 0% 50%;
+//   }
+//   50% {
+//     background-position: 100% 50%;
+//   }
+//   100% {
+//     background-position: 0% 50%;
+//   }
+// }
 
-.background.--dark {
-  background: $bgc-linear-gradient-dark;
-  background-size: 200% 200%;
-  animation: gradient 5s ease infinite;
-}
+// .background.--dark {
+//   background: $bgc-linear-gradient-dark;
+//   background-size: 200% 200%;
+//   animation: gradient 5s ease infinite;
+// }
 
 main {
   padding: 0 $padding-phone;

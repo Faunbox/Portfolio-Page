@@ -50,6 +50,7 @@
 
   @media (min-width: 1024px) {
     width: $aside-menu-width-big-screen;
+    background-color: $aside-menu-bgc;
     transform: translateX(0);
     border-bottom-right-radius: 0;
     height: 100%;
@@ -104,4 +105,8 @@
 .menu.--dark {
   background-color: $aside-menu-phone-bgc-dark;
   color: $font-color-dark;
+
+  @media (min-width: 1024px) {
+    background-color: $aside-menu-bgc-dark;
+  }
 }

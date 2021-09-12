@@ -1,8 +1,6 @@
 import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
 import Ui from "./Ui";
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default class Skills extends Ui {
   isActive = false;

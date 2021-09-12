@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./sass/index.scss";
+
 import Menu from "./js/Menu";
 import Theme from "./js/Theme";
 import Card from "./js/Card";

@@ -37,6 +37,9 @@
     "@babel/polyfill": "^7.12.1",
     "bootstrap": "^5.0.2",
     "firebase": "^8.8.1",
-    "gsap": "^3.7.1"
+    "gsap": "^3.7.1",
+    "three": "^0.132.2",
+    "three.js": "^0.77.1",
+    "vanta": "^0.5.21"
   }
 }
