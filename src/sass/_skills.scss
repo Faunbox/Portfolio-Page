@@ -1,26 +1,30 @@
 .skills {
+  display: flex;
+  flex-direction: column;
   margin-bottom: $margin-bottom-section;
   overflow-x: hidden;
 
   .skills__header {
     margin: $margin-headers;
   }
-  .skills__wrapper {
+  .skills__learned,
+  .skills_learning {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+  }
 
-    .skills__element {
-      margin: 1.5rem;
-      .skills__image {
-        width: 80px;
-        height: 80px;
+  .skills__element {
+    margin: 1.5rem;
+    text-align: center;
+    .skills__image {
+      width: 80px;
+      height: 80px;
 
-        @media (min-width: 763px) {
-          width: 100px;
-          height: 100px;
-        }
+      @media (min-width: 763px) {
+        width: 100px;
+        height: 100px;
       }
     }
   }

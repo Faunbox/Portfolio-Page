@@ -55,9 +55,19 @@
         width: 19px;
         height: 19px;
         margin-right: 5px;
-
         content: "";
         background-image: url("../../public/images/envelope.svg");
+        background-repeat: no-repeat;
+      }
+    }
+    .--linkedIn {
+      &::before {
+        display: inline-block;
+        width: 19px;
+        height: 19px;
+        margin-right: 5px;
+        content: "";
+        background-image: url("../../public/images/linkedin.svg");
         background-repeat: no-repeat;
       }
     }

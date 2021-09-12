@@ -54,7 +54,7 @@ export default class ScrollAnimations extends Ui {
 
   #animationPageOnPageLoad() {
     gsap.fromTo(
-      [this.#introPage,this.#menu],
+      [this.#introPage, this.#menu],
       { opacity: 0, y: -50 },
       {
         opacity: 1,
