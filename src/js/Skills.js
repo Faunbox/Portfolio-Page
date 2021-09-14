@@ -1,9 +1,12 @@
 import gsap from "gsap";
 import Ui from "./Ui";
-
+import Animation from "./Animations";
 
 export default class Skills extends Ui {
+  skillsArray = this.getElements(this.UiSelectors.skillsImg);
+  animation = new Animation();
   isActive = false;
+
   #animateOnClick = (element) => {
     if (!this.isActive) {
       gsap
@@ -24,9 +27,17 @@ export default class Skills extends Ui {
     }
   };
 
+  #setAnimation() {
+    const randomNumber = Math.floor(Math.random() * this.skillsArray.length);
+    this.animation.elementBouncing(this.skillsArray[randomNumber]);
+  }
+
   #handleOnClick = () => {
-    this.getElements(this.UiSelectors.skillsImg).forEach((element) => {
-      element.addEventListener("click", () => this.#animateOnClick(element));
+    this.skillsArray.forEach((element) => {
+      element.addEventListener("click", () => {
+        this.#animateOnClick(element);
+        this.#setAnimation()
+      });
     });
   };
 

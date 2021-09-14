@@ -5,11 +5,11 @@ import Menu from "./js/Menu";
 import Theme from "./js/Theme";
 import Card from "./js/Card";
 import Skills from "./js/Skills";
-import ScrollAnimations from "./js/ScrollAnimations";
+import Animations from "./js/Animations";
 
 class App {
   #menu = new Menu();
-  #animation = new ScrollAnimations();
+  #animation = new Animations();
   #theme = new Theme();
   #card = new Card();
   #skills = new Skills();

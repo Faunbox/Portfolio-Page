@@ -1,4 +1,5 @@
 import gsap from "gsap/gsap-core";
+import Animations from "./Animations";
 import Ui from "./Ui";
 
 export default class Menu extends Ui {
@@ -10,6 +11,7 @@ export default class Menu extends Ui {
   menu = this.getElement(this.UiSelectors.nav);
   hamburger = this.getElement(this.UiSelectors.hamburger);
   menuSwitcher = this.getElement(this.UiSelectors.switchOffMenu);
+  animation = new Animations();
   isMenuActive = false;
 
   menuAnimationOnPageLoad() {
@@ -38,24 +40,40 @@ export default class Menu extends Ui {
       this.isMenuActive = false;
       this.menuSwitcher.style.display = "none";
 
-      return animation.reverse(0);
+      return (
+        this.animation.rotateMenuOnClick().reverse(0), animation.reverse(0)
+      );
     }
+
     this.isMenuActive = true;
     this.menuSwitcher.style.display = "block";
+
+    this.animation.rotateMenuOnClick().play();
     return animation.play();
   }
 
   addEventListeners() {
-    this.hamburger.addEventListener("click", () => this.#toggleMenuActive());
+    this.hamburger.addEventListener("click", () => {
+      this.#toggleMenuActive();
+    });
+    // ["click", "touchstart", "touchend", "touchmove"].map((name) =>
+    //   this.menuSwitcher.addEventListener(name, this.#toggleMenuActive())
+    // );
     this.menuSwitcher.addEventListener("click", () => this.#toggleMenuActive());
 
     //responsive menu display after open on mobile and resize to big screen
     window.addEventListener("resize", () => {
       if (window.innerWidth >= 1024) {
+        this.menuSwitcher.style.display = "none";
+
         gsap
           .set(this.menu, { x: 0, opacity: 1 })
           .then(gsap.set(this.menuElements, { scale: 1, opacity: 1 }));
       } else gsap.set(this.menu, { x: -this.menu.offsetWidth });
+      if (this.isMenuActive && window.innerWidth >= 1024) {
+        this.menuSwitcher.style.display = "block";
+        this.animation.rotateMenuOnClick().reverse(0);
+      }
     });
   }
 

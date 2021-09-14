@@ -1,5 +1,5 @@
 import Ui from "./Ui";
-import Animate from "./ScrollAnimations";
+import Animations from "./Animations";
 import { db } from "../../config/firebaseConfig";
 
 export default class Card extends Ui {
@@ -8,7 +8,7 @@ export default class Card extends Ui {
   #db = db;
   #collection = "fl_content";
   #docRef = this.#db.collection(this.#collection).get();
-  #animate = new Animate();
+  #animate = new Animations();
 
   getData = async () => {
     await this.#docRef

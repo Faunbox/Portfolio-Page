@@ -4,8 +4,9 @@ import Ui from "./Ui";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default class ScrollAnimations extends Ui {
+export default class Animations extends Ui {
   #menu = this.getElement(this.UiSelectors.nav);
+  #hamburger = this.getElement(this.UiSelectors.hamburger);
 
   #introPage = [...this.getElement(this.UiSelectors.intro).children];
 
@@ -64,6 +65,26 @@ export default class ScrollAnimations extends Ui {
         stagger: 0.3,
       }
     );
+  }
+
+  elementBouncing(element) {
+    gsap.to(element, { x: 30 });
+    gsap.to(element, { x: -30 });
+    gsap.to(element, { x: 20 });
+    gsap.to(element, { x: -20 });
+    gsap.to(element, { x: 0 });
+  }
+
+  rotateMenuOnClick() {
+    const animation = gsap.fromTo(
+      this.#hamburger,
+
+      {
+        rotate: 0,
+      },
+      { rotate: 90, duration: 0.5 }
+    );
+    return animation;
   }
 
   #showContentOnScroll(elements, trigger) {
