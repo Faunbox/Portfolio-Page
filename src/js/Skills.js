@@ -28,20 +28,19 @@ export default class Skills extends Ui {
   };
 
   #setAnimation() {
-    const randomNumber = Math.floor(Math.random() * this.skillsArray.length);
-    this.animation.elementBouncing(this.skillsArray[randomNumber]);
+    return this.animation.elementBouncing(this.skillsArray[3]);
   }
 
   #handleOnClick = () => {
     this.skillsArray.forEach((element) => {
       element.addEventListener("click", () => {
         this.#animateOnClick(element);
-        this.#setAnimation()
       });
     });
   };
 
   init() {
     this.#handleOnClick();
+    this.#setAnimation();
   }
 }

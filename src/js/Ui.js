@@ -13,6 +13,7 @@ export default class Ui {
     about: ".about__wrapper",
     //skills
     skills: ".skills",
+    skillsDiv: ".skills__element",
     skillsImg: ".skills__image",
     //projects
     projects: ".projects",

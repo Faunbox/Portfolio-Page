@@ -55,7 +55,7 @@ export default class Animations extends Ui {
 
   #animationPageOnPageLoad() {
     gsap.fromTo(
-      [this.#introPage, this.#menu],
+      [this.#introPage, this.#menu, this.#hamburger],
       { opacity: 0, y: -50 },
       {
         opacity: 1,
@@ -68,11 +68,18 @@ export default class Animations extends Ui {
   }
 
   elementBouncing(element) {
-    gsap.to(element, { x: 30 });
-    gsap.to(element, { x: -30 });
-    gsap.to(element, { x: 20 });
-    gsap.to(element, { x: -20 });
-    gsap.to(element, { x: 0 });
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 6, delay: 3 });
+    const animation = tl
+      .to(element, { x: 10 })
+      .to(element, { x: -10 })
+      .to(element, { x: 6 })
+      .to(element, { x: -6 })
+      .to(element, { x: 3 })
+      .to(element, { x: 0 });
+
+    element.addEventListener("click", () => animation.kill());
+
+    return animation.duration(1);
   }
 
   rotateMenuOnClick() {

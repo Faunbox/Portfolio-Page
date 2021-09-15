@@ -56,10 +56,15 @@ export default class Menu extends Ui {
     this.hamburger.addEventListener("click", () => {
       this.#toggleMenuActive();
     });
-    // ["click", "touchstart", "touchend", "touchmove"].map((name) =>
-    //   this.menuSwitcher.addEventListener(name, this.#toggleMenuActive())
+    ["click", "touchstart"].forEach((event) =>
+      this.menuSwitcher.addEventListener(
+        event,
+        () => this.#toggleMenuActive()
+      )
     // );
-    this.menuSwitcher.addEventListener("click", () => this.#toggleMenuActive());
+    // this.menuSwitcher.addEventListener("touchstart", () =>
+    //   this.#toggleMenuActive()
+    );
 
     //responsive menu display after open on mobile and resize to big screen
     window.addEventListener("resize", () => {
