@@ -7,6 +7,7 @@ export default class Theme extends Ui {
   hamburger = this.getElement(this.UiSelectors.hamburger);
   themeSwitcher = this.getElement(this.UiSelectors.themeSwitcher);
   main = this.getElement(this.UiSelectors.main);
+  footerContent = this.getElements(this.UiSelectors.footerContent);
   backgroundFlag = false;
 
   #className = "--dark";
@@ -25,6 +26,9 @@ export default class Theme extends Ui {
       element.classList.toggle("btn-light");
       element.classList.toggle("btn-secondary");
     });
+    this.footerContent.forEach((element) =>
+      element.classList.toggle(this.#className)
+    );
 
     projectsElement.forEach((element) => {
       element.classList.toggle(this.#className);

@@ -24,6 +24,7 @@ export default class Ui {
     //contact and footer
     contact: ".contact",
     footer: ".footer",
+    footerContent: ".footer__content",
     //bootstrap
     themeSwitcher: ".form-check",
     bootstrapBtn: ".btn",

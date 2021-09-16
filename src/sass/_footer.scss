@@ -29,6 +29,11 @@
       text-align: center;
       content: "";
     }
+
+    .footer__content.--dark::before {
+      filter: invert(100%);
+    }
+
     .--location::before {
       display: inline-block;
       width: 19px;
