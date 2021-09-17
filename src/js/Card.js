@@ -10,7 +10,7 @@ export default class Card extends Ui {
   #docRef = this.#db.collection(this.#collection).get();
   #animate = new Animations();
 
-  getData = async () => {
+  #getData = async () => {
     await this.#docRef
       .then((snapshot) => {
         snapshot.forEach((doc) => this.#appendDataToTemplate(doc.data()));
@@ -47,4 +47,8 @@ export default class Card extends Ui {
 
     projectsWrapper.appendChild(clone);
   };
+
+  init() {
+    this.#getData()
+  }
 }

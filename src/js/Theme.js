@@ -1,32 +1,31 @@
 import Ui from "./Ui";
 
 export default class Theme extends Ui {
-  background = this.getElement(this.UiSelectors.background);
-  footer = this.getElement(this.UiSelectors.footer);
-  nav = this.getElement(this.UiSelectors.nav);
-  hamburger = this.getElement(this.UiSelectors.hamburger);
-  themeSwitcher = this.getElement(this.UiSelectors.themeSwitcher);
-  main = this.getElement(this.UiSelectors.main);
-  footerContent = this.getElements(this.UiSelectors.footerContent);
-  backgroundFlag = false;
+  #background = this.getElement(this.UiSelectors.background);
+  #footer = this.getElement(this.UiSelectors.footer);
+  #nav = this.getElement(this.UiSelectors.nav);
+  #hamburger = this.getElement(this.UiSelectors.hamburger);
+  #themeSwitcher = this.getElement(this.UiSelectors.themeSwitcher);
+  #main = this.getElement(this.UiSelectors.main);
+  #footerContent = this.getElements(this.UiSelectors.footerContent);
 
   #className = "--dark";
 
-  handleSwitchTheme() {
+  #handleSwitchTheme() {
     const bootstrapButton = this.getElements(this.UiSelectors.bootstrapBtn);
     const cards = this.getElements(this.UiSelectors.card);
     const projectsElement = [...cards];
 
-    this.background.classList.toggle(this.#className);
-    this.footer.classList.toggle(this.#className);
-    this.nav.classList.toggle(this.#className);
-    this.hamburger.classList.toggle(this.#className);
-    this.main.classList.toggle(this.#className);
+    this.#background.classList.toggle(this.#className);
+    this.#footer.classList.toggle(this.#className);
+    this.#nav.classList.toggle(this.#className);
+    this.#hamburger.classList.toggle(this.#className);
+    this.#main.classList.toggle(this.#className);
     bootstrapButton.forEach((element) => {
       element.classList.toggle("btn-light");
       element.classList.toggle("btn-secondary");
     });
-    this.footerContent.forEach((element) =>
+    this.#footerContent.forEach((element) =>
       element.classList.toggle(this.#className)
     );
 
@@ -39,8 +38,8 @@ export default class Theme extends Ui {
   }
 
   init() {
-    this.themeSwitcher.addEventListener("click", () => {
-      this.handleSwitchTheme();
+    this.#themeSwitcher.addEventListener("click", () => {
+      this.#handleSwitchTheme();
     });
   }
 }

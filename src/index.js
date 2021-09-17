@@ -15,9 +15,8 @@ class App {
   #skills = new Skills();
 
   init() {
-    this.#card.getData();
-    this.#menu.addEventListeners();
-    this.#menu.handleMenuElement();
+    this.#card.init();
+    this.#menu.init();
     this.#skills.init();
     this.#animation.init();
     this.#theme.init();

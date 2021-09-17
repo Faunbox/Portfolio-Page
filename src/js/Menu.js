@@ -1,6 +1,5 @@
-import gsap from "gsap/gsap-core";
-import Animations from "./Animations";
 import Ui from "./Ui";
+import Animations from "./Animations";
 
 export default class Menu extends Ui {
   menuElements = [
@@ -12,73 +11,30 @@ export default class Menu extends Ui {
   hamburger = this.getElement(this.UiSelectors.hamburger);
   menuSwitcher = this.getElement(this.UiSelectors.switchOffMenu);
   animation = new Animations();
-  isMenuActive = false;
-
-  menuAnimationOnPageLoad() {
-    if (window.innerWidth >= 1024) {
-      console.log(window.innerWidth);
-      gsap.fromTo(this.menu, { scale: 0 }, { scale: 1.0, opacity: 1 });
-    }
+  #toggleMenuActiveAnimation() {
+    return this.animation.toggleMenuActive(
+      this.menu,
+      this.menuElements,
+      this.menuSwitcher
+    );
   }
-
-  #toggleMenuActive() {
-    const menuWidth = this.menu.offsetWidth;
-    const tl = gsap.timeline();
-    const animation = tl
-      .fromTo(
-        this.menu,
-        { x: -menuWidth, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.5 }
-      )
-      .fromTo(
-        this.menuElements,
-        { scale: 0, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.4, stagger: 0.1 }
-      );
-
-    if (this.isMenuActive && window.innerWidth < 1024) {
-      this.isMenuActive = false;
-      this.menuSwitcher.style.display = "none";
-
-      return (
-        this.animation.rotateMenuOnClick().reverse(0), animation.reverse(0)
-      );
-    }
-
-    this.isMenuActive = true;
-    this.menuSwitcher.style.display = "block";
-
-    this.animation.rotateMenuOnClick().play();
-    return animation.play();
-  }
-
-  addEventListeners() {
+  #addEventListeners() {
     this.hamburger.addEventListener("click", () => {
-      this.#toggleMenuActive();
+      this.#toggleMenuActiveAnimation();
     });
     ["click", "touchstart"].forEach((event) =>
       this.menuSwitcher.addEventListener(
         event,
-        () => this.#toggleMenuActive()
+        () => this.#toggleMenuActiveAnimation()
       )
-    // );
-    // this.menuSwitcher.addEventListener("touchstart", () =>
-    //   this.#toggleMenuActive()
     );
-
     //responsive menu display after open on mobile and resize to big screen
     window.addEventListener("resize", () => {
-      if (window.innerWidth >= 1024) {
-        this.menuSwitcher.style.display = "none";
-
-        gsap
-          .set(this.menu, { x: 0, opacity: 1 })
-          .then(gsap.set(this.menuElements, { scale: 1, opacity: 1 }));
-      } else gsap.set(this.menu, { x: -this.menu.offsetWidth });
-      if (this.isMenuActive && window.innerWidth >= 1024) {
-        this.menuSwitcher.style.display = "block";
-        this.animation.rotateMenuOnClick().reverse(0);
-      }
+      this.animation.menuAnimationOnResize(
+        this.menuSwitcher,
+        this.menu,
+        this.menuElements
+      );
     });
   }
 
@@ -90,15 +46,20 @@ export default class Menu extends Ui {
         block: "start",
       });
       if (window.innerWidth <= 1024) {
-        this.#toggleMenuActive();
+        this.#toggleMenuActiveAnimation();
       }
     });
   }
 
-  handleMenuElement() {
+  #handleMenuElement() {
     this.mainElement.shift();
     for (let i = 0; i <= this.mainElement.length - 1; i++) {
       this.#handleScrollToElemenet(this.menuElements[i], this.mainElement[i]);
     }
+  }
+
+  init() {
+    this.#addEventListeners();
+    this.#handleMenuElement();
   }
 }
